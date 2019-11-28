@@ -6,13 +6,19 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/11/26 17:44:51 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/11/28 18:19:31 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
 /*
+** 					% [flags][width][.precision][size][type]
+** [FLAGS] = '-' / '+' / '0' / ' ' / '#'
+** [WIDTH] = unsigned integer indicates the minimum width 
+** [PRECISION] = unsigned integer indicate the precision after the '.'
+** [SIZE] = converts the argument type in an other type ( l / ll / h / hh )
+** [TYPE] = c / s / p / d / i / u / x / X / n / f / e / g 
 **-----------------------------------------------------------------------------
 **							Regular conversions
 **-----------------------------------------------------------------------------
@@ -51,22 +57,29 @@
 **-----------------------------------------------------------------------------
 */
 
+#include "ft_printf.h"
+
 int main(void)
 {
 	char c = 'z';
 	char *s = "Melimelow";
-	char *p = s;
-	int d = -12945;
-	int i = -8000;
-	unsigned int u = 14654;
-	int x = 2397;
-	int X = x;
-	int len;
+//	char *p = s;
+//	int d = -12945;
+//	int i = -8000;
+//	unsigned int u = 14654;
+//	int x = 2397;
+//	int X = x;
+//	int len;
 
+	ft_printf("c : %c", c);
+	write(1, "\n", 1);
+	ft_printf("s : %s", s);
+
+/*
 	printf("c = %c\n", c);
 	printf("s = %s\n", s);
 	printf("p = %p\n", p);
-	printf("d = %d\n", d);
+	printf("d = %15d\n", d);
 	printf("i = %i\n", i);
 	printf("u = %u\n", u);
 	printf("x = %x\n", x);
@@ -85,6 +98,6 @@ int main(void)
 	printf("u = %d\n", u);
 	printf("u = % *d\n",9, u);
 	printf("printf : len = %d\n", len);
-
+*/
 	return (0);
 }
