@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 18:04:38 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 22:03:52 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_struct
 	int			sharp;
 	int			star;
 	int			width;
+	int			precision;
 	va_list		par;
 }				t_printf;
 

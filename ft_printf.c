@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 21:56:03 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 22:05:47 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,15 +293,27 @@ void		ft_get_width(t_printf *s)
 	int width;
 
 	width = 0;
-
 	while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
 	{
 		width = (width * 10) + (s->fmt[0] - '0');
 		s->fmt++;
 	}
 	s->width = width;
-	printf("\n%d", s->width);
 	return ;
+}
+
+void		ft_get_precision(t_printf *s)
+{
+	int pres;
+
+	pres = 0;
+	while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+	{
+		pres = (pres * 10) + (s->fmt[0] - '0');
+		s->fmt++;
+	}
+	s->precision = pres;
+	return ;	
 }
 
 int			ft_printf(const char *format, ...)
