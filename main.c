@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/11/28 18:19:31 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 16:51:17 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,31 @@ int main(void)
 {
 	char c = 'z';
 	char *s = "Melimelow";
-//	char *p = s;
-//	int d = -12945;
-//	int i = -8000;
-//	unsigned int u = 14654;
-//	int x = 2397;
-//	int X = x;
+	char *p = s;
+	int d = -12945;
+	int i = -8001;
+	unsigned int u = 14654;
+	int x = 2397;
+	int X = x;
 //	int len;
 
-	ft_printf("c : %c", c);
-	write(1, "\n", 1);
-	ft_printf("s : %s", s);
+	ft_printf("%c", c);
+	ft_printf("\n%s", s);
+	ft_printf("\n%p", p);
+	ft_printf("\n%d", d);
+	ft_printf("\n%i", i);
+	ft_printf("\n%u", u);
+	ft_printf("\n%x", x);
+	ft_printf("\n%X", X);
+	printf("\n----------------------------------------\n");
+	printf("%c", c);
+	printf("\n%s", s);
+	printf("\n%p", p);
+	printf("\n%+-10d",d);
+	printf("\n%+-10i", i);
+	printf("\n%-10u", u);
+	printf("\n%-10x", x);
+	printf("\n%-10X", X);
 
 /*
 	printf("c = %c\n", c);

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/11/28 18:19:24 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 16:51:14 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,61 @@ char		*ft_strjoin_endl(char *s1, const char *s2)
 	return (str);
 }
 
+char	*print_nbr_base(long nb, char *base, int len_base, int len_res)
+{
+	char	*res;
+	int		sign;
+
+	sign = 0;
+	if (nb < 0)
+	{
+		nb = -nb;
+		sign = 1;
+	}
+	if (!(res = (char *)malloc(sizeof(char) * (len_res + sign))))
+		return (NULL);
+	res[len_res + sign - 1] = '\0';
+	while (len_res > sign)
+	{
+		res[len_res - 2 + sign] = base[nb % len_base];
+		nb = nb / len_base;
+		len_res--;
+	}
+	if (sign == 1)
+		res[0] = '-';
+	return (res);
+}
+
+char		*ft_itoa_base(long nbr, char *base)
+{
+	char	*res;
+	long	nb;
+	int		len_base;
+	int		len_res;
+
+	if (!nbr || !base)
+		return (NULL);
+	nb = nbr;
+	len_base = ft_strlen(base);
+	len_res = 2;
+	if (nb < 0)
+		nb = -nb;
+	while (nb / len_base > 0)
+	{
+		len_res++;
+		nb = nb / len_base;
+	}
+	nb = nbr;
+	res = print_nbr_base(nb, base, len_base, len_res);
+	return (res);
+}
+
 void		ft_get_type(t_printf *s)
 {
 	if (s->fmt[0] == 'c')
 		ft_c(s);
 	if (s->fmt[0] == 's')
 		ft_s(s);
-/*
 	if (s->fmt[0] == 'p')
 		ft_p(s);
 	if (s->fmt[0] == 'd')
@@ -76,6 +124,7 @@ void		ft_get_type(t_printf *s)
 		ft_x(s);
 	if (s->fmt[0] == 'X')
 		ft_x_up(s);
+/*
 	if (s->fmt[0] == 'n')
 		ft_n(s);
 	if (s->fmt[0] == 'e')
@@ -100,6 +149,79 @@ void		ft_c(t_printf *s)
 void		ft_s(t_printf *s)
 {
 	s->str = ft_strjoin(s->str, (char*)va_arg(s->par, char *));
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_p(t_printf *s)
+{
+	long ptr;
+	char *tmp;
+
+	ptr = (long)va_arg(s->par, long);
+	tmp = ft_itoa_base(ptr, "0123456789abcdef");
+	s->str = ft_strjoin(s->str, "0x");
+	s->str = ft_strjoin(s->str, tmp);
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_d(t_printf *s)
+{
+	int d;
+	char *tmp;
+
+	d = (int)va_arg(s->par, int);
+	tmp = ft_itoa_base(d, "0123456789");
+	s->str = ft_strjoin(s->str, tmp);
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_i(t_printf *s)
+{
+	int i;
+	char *tmp;
+
+	i = (int)va_arg(s->par, int);
+	tmp = ft_itoa_base(i, "0123456789");
+	s->str = ft_strjoin(s->str, tmp);
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_u(t_printf *s)
+{
+	unsigned int u;
+	char *tmp;
+
+	u = (unsigned int)va_arg(s->par, unsigned int);
+	tmp = ft_itoa_base(u, "0123456789");
+	s->str = ft_strjoin(s->str, tmp);
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_x(t_printf *s)
+{
+	long l;
+	char *tmp;
+
+	l = (long)va_arg(s->par, long);
+	tmp = ft_itoa_base(l, "0123456789abcdef");
+	s->str = ft_strjoin(s->str, tmp);
+	s->fmt += 1;
+	return ;
+}
+
+void		ft_x_up(t_printf *s)
+{
+	long l;
+	char *tmp;
+
+	l = (long)va_arg(s->par, long);
+	tmp = ft_itoa_base(l, "0123456789abcdef");
+	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
 	return ;
 }

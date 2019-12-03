@@ -6,7 +6,7 @@
 #    By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/14 10:25:16 by ygeslin           #+#    #+#              #
-#    Updated: 2019/11/25 21:15:46 by ygeslin          ###   ########.fr        #
+#    Updated: 2019/11/27 15:22:40 by ygeslin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ ft_isdigit.c ft_memset.c ft_strdup.c ft_strtrim.c ft_itoa.c ft_strmapi.c \
 ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c \
-ft_atoi_base.c ft_convert_base.c \
+ft_convert_base.c ft_atoi_base.c \
 
 OBJECTS= ft_atoi.o ft_isprint.o ft_putchar_fd.o ft_strjoin.o ft_substr.o \
 ft_bzero.o ft_memccpy.o ft_putendl_fd.o ft_strlcat.o ft_tolower.o ft_strrchr.o\
@@ -32,7 +32,7 @@ ft_isdigit.o ft_memset.o ft_strdup.o ft_strtrim.o ft_itoa.o ft_strmapi.o\
 ft_lstnew_bonus.o ft_lstadd_front_bonus.o ft_lstsize_bonus.o \
 ft_lstlast_bonus.o ft_lstadd_back_bonus.o ft_lstdelone_bonus.o \
 ft_lstclear_bonus.o ft_lstiter_bonus.o ft_lstmap_bonus.o \
-ft_atoi_base.o ft_convert_base.o \
+ft_convert_base.o ft_atoi_base.o  \
 
 INCLUDES=./
 
@@ -40,12 +40,12 @@ all: $(NAME)
 	
 $(NAME): $(SRCS) libft.h
 
-	gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRCS)
-	ar rc $(NAME) $(OBJECTS)
-	ranlib $(NAME)
+	@gcc -Wall -Wextra -Werror -I$(INCLUDES) -c $(SRCS)
+	@ar rc $(NAME) $(OBJECTS)
+	@ranlib $(NAME)
 	
 clean:
-	/bin/rm -f $(OBJECTS) 
+	@/bin/rm -f $(OBJECTS) 
 
 fclean: clean
 	@/bin/rm -f $(NAME)
