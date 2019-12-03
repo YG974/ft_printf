@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/11/28 17:55:05 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 16:51:19 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,27 @@
 # include <stdio.h>
 # include <stdarg.h>
 # include "libft.h"
-# define MALLCHECK(x) if (!x) return (-1);
 
 typedef struct	s_struct
 {
 	char		*fmt;
 	char		*str;
+	int			minus;
+	int			positive;
+	int			zero;
+	int			space;
+	int			sharp;
+	int			star;
+	int			width;
 	va_list		par;
 }				t_printf;
 
 int		ft_printf(const char *format, ...);
+void	ft_get_flags(t_printf *ptr);
+void	ft_init_flags(t_printf *ptr);
+int		ft_char_is_flag(t_printf *ptr);
 void	ft_get_type(t_printf *ptr);
+char	*ft_itoa_base(long	nbr, char *base);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
 void	ft_p(t_printf *ptr);
