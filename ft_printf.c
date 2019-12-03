@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 16:51:14 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 17:24:46 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,7 @@ void		ft_x_up(t_printf *s)
 	char *tmp;
 
 	l = (long)va_arg(s->par, long);
-	tmp = ft_itoa_base(l, "0123456789abcdef");
+	tmp = ft_itoa_base(l, "0123456789ABCDEF");
 	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
 	return ;
