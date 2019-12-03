@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 18:27:44 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 21:56:03 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,22 @@ void		ft_get_flags(t_printf *s)
 	return ;
 }
 
+void		ft_get_width(t_printf *s)
+{
+	int width;
+
+	width = 0;
+
+	while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+	{
+		width = (width * 10) + (s->fmt[0] - '0');
+		s->fmt++;
+	}
+	s->width = width;
+	printf("\n%d", s->width);
+	return ;
+}
+
 int			ft_printf(const char *format, ...)
 {
 	t_printf	s;
@@ -301,7 +317,7 @@ int			ft_printf(const char *format, ...)
 		s.str = ft_strjoin_endl(s.str, s.fmt);
 		s.fmt += ft_int_strchr(s.fmt, '%') + 1;
 		ft_get_flags(&s);
-//		ft_get_width(&s);
+		ft_get_width(&s);
 //		ft_get_precision(&s);
 //		ft_get_size(&s);
 		ft_get_type(&s);

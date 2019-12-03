@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 18:25:24 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/03 21:56:16 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int main(void)
 	int X = x;
 //	int len;
 
-	ft_printf("%c", c);
-	ft_printf("\n%-9s", s);
-	ft_printf("\n%-9p", p);
-	ft_printf("\n%-9d", d);
-	ft_printf("\n%-9i", i);
-	ft_printf("\n%-9u", u);
-	ft_printf("\n%-9x", x);
-	ft_printf("\n%-9X", X);
+	ft_printf("\n%c", c);
+	ft_printf("\n%459s", s);
+	ft_printf("\n%9p", p);
+	ft_printf("\n%9d", d);
+	ft_printf("\n%9i", i);
+	ft_printf("\n%9u", u);
+	ft_printf("\n%9x", x);
+	ft_printf("\n%9X", X);
 	printf("\n----------------------------------------\n");
 	printf("%-9c", c);
 	printf("\n%-9s", s);
@@ -87,7 +87,7 @@ int main(void)
 	printf("\n%-9i", i);
 	printf("\n%-9u", u);
 	printf("\n%-9x", x);
-	printf("\n%-9X", X);
+	printf("\n%-9X\n", X);
 
 /*
 	printf("c = %c\n", c);
