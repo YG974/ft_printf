@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/03 22:05:47 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/04 15:41:53 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,31 +144,55 @@ void		ft_get_type(t_printf *s)
 void		ft_c(t_printf *s)
 {
 	char tmp[2];
+	char *pad;
 
+	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
+		return ;
 	tmp[0] = (char)va_arg(s->par, int);
 	s->str = ft_strjoin(s->str, &tmp[0]);
 	tmp[1] = '\0';
 	s->fmt += 1;
+	pad = ft_memset(pad, ' ', (s->width - 1));
+	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
 
 void		ft_s(t_printf *s)
 {
-	s->str = ft_strjoin(s->str, (char*)va_arg(s->par, char *));
+	char	*tmp;
+	char	*pad;
+	int		len;
+
+	tmp = ((char*)va_arg(s->par, char *));
+	len = ft_strlen(tmp);
+	len = (len > s->width ? 0 : s->width - len);
+	if (!(pad = (char *)malloc(len * sizeof(char))))
+		return ;
+	s->str = ft_strjoin(s->str,tmp);
 	s->fmt += 1;
+	pad = ft_memset(pad, ' ', len);
+	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
 
 void		ft_p(t_printf *s)
 {
-	long ptr;
-	char *tmp;
+	long 	ptr;
+	char 	*tmp;
+	char 	*pad;
+	int 	len;
 
 	ptr = (long)va_arg(s->par, long);
 	tmp = ft_itoa_base(ptr, "0123456789abcdef");
+	len = ft_strlen(tmp) + 2;
+	len = (len > s->width ? 0 : s->width - len);
+	if (!(pad = (char *)malloc(len * sizeof(char))))
+		return ;
 	s->str = ft_strjoin(s->str, "0x");
 	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
+	pad = ft_memset(pad, ' ', len);
+	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
 
@@ -176,11 +200,19 @@ void		ft_d(t_printf *s)
 {
 	int		d;
 	char	*tmp;
+	char 	*pad;
+	int 	len;
 
 	d = (int)va_arg(s->par, int);
 	tmp = ft_itoa_base(d, "0123456789");
+	len = ft_strlen(tmp);
+	len = (len > s->width ? 0 : s->width - len);
+	if (!(pad = (char *)malloc(len * sizeof(char))))
+		return ;
 	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
+	pad = ft_memset(pad, ' ', len);
+	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
 
@@ -188,11 +220,19 @@ void		ft_i(t_printf *s)
 {
 	int		i;
 	char	*tmp;
+	char	*pad;
+	int 	len;
 
 	i = (int)va_arg(s->par, int);
 	tmp = ft_itoa_base(i, "0123456789");
+	len = ft_strlen(tmp);
+	len = (len > s->width ? 0 : s->width - len);
+	if (!(pad = (char *)malloc(len * sizeof(char))))
+		return ;
 	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
+	pad = ft_memset(pad, ' ', len);
+	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
 
@@ -330,7 +370,7 @@ int			ft_printf(const char *format, ...)
 		s.fmt += ft_int_strchr(s.fmt, '%') + 1;
 		ft_get_flags(&s);
 		ft_get_width(&s);
-//		ft_get_precision(&s);
+		ft_get_precision(&s);
 //		ft_get_size(&s);
 		ft_get_type(&s);
 	}
