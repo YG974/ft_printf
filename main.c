@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/04 16:55:36 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:00:46 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int main(void)
 	int X = x;
 //	int len;
 
-	ft_printf("\n%-9c", c);
-	ft_printf("\n%-4s", s);
+	ft_printf("\n%9c", c);
+	ft_printf("\n%4s", s);
 	ft_printf("\n%p", p);
 	ft_printf("\n%+9d", d);
 	ft_printf("\n%+9i", i);
@@ -34,8 +34,8 @@ int main(void)
 	ft_printf("\n%9x", x);
 	ft_printf("\n%9X", X);
 	printf("\n----------------------------------------\n");
-	printf("%-9c", c);
-	printf("\n%-4s", s);
+	printf("%9c", c);
+	printf("\n%4s", s);
 	printf("\n%p", p);
 	printf("\n%+9d",d);
 	printf("\n%+9i", i);

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/04 15:41:53 by ygeslin          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:04:22 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ void		ft_d(t_printf *s)
 	len = (len > s->width ? 0 : s->width - len);
 	if (!(pad = (char *)malloc(len * sizeof(char))))
 		return ;
+	pad = ft_memset(pad, ' ', len - 1);
+	tmp = ft_strjoin(pad, tmp);	
 	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
 	pad = ft_memset(pad, ' ', len);
