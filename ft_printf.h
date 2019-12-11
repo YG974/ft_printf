@@ -85,6 +85,7 @@ void	ft_get_flags(t_printf *ptr);
 void	ft_init_flags(t_printf *ptr);
 int		ft_char_is_flag(t_printf *ptr);
 void	ft_get_type(t_printf *ptr);
+void	ft_get_precision(t_printf *s);
 char	*ft_itoa_base(long	nbr, char *base);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);

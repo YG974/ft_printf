@@ -18,30 +18,30 @@ int main(void)
 	char c = 'z';
 	char *s = "Melimelow";
 	char *p = s;
-	int d = -12945;
+	int d = 12945;
 	int i = 8001;
 	unsigned int u = 14654;
 	int x = 2397;
 	int X = x;
 //	int len;
 
-	ft_printf("\n%9c", c);
-	ft_printf("\n%4s", s);
+	ft_printf("%9c", c);
+	ft_printf("\n%.4s", s);
 	ft_printf("\n%p", p);
-	ft_printf("\n%+9d", d);
-	ft_printf("\n%+9i", i);
+	ft_printf("\n%.9d", d);
+	ft_printf("\n%9i", i);
 	ft_printf("\n%9u", u);
 	ft_printf("\n%9x", x);
 	ft_printf("\n%9X", X);
 	printf("\n----------------------------------------\n");
 	printf("%9c", c);
-	printf("\n%4s", s);
+	printf("\n%.4s", s);
 	printf("\n%p", p);
-	printf("\n%+9d",d);
-	printf("\n%+9i", i);
-	printf("\n%9u", u);
-	printf("\n%9x", x);
-	printf("\n%9X\n", X);
+	printf("\n%.9d",d);
+	printf("\n%.9i", i);
+	printf("\n%.9u", u);
+	printf("\n%.9x", x);
+	printf("\n%.9X\n", X);
 
 /*
 	printf("c = %c\n", c);

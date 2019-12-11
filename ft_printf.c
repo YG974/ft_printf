@@ -29,6 +29,33 @@ int			ft_int_strchr(const char *s, int c)
 	return (-1);
 }
 
+char		*ft_strjoin_n(char *s1, const char *s2, int n)
+{
+	int		len1;
+	int		len2;
+	int		i;
+	char	*str;
+
+	len1 = (s1 == NULL ? 0 : ft_strlen(s1));
+	len2 = (n == 0 ? ft_strlen(s2) : n);
+	i = 0;
+	if (!(str = malloc(sizeof(char) * (len1 + len2 + 1))))
+		return (NULL);
+	while (i < len1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i < len1 + len2)
+	{
+		str[i] = s2[i - len1];
+		i++;
+	}
+	str[i] = '\0';
+	free(s1);
+	return (str);
+}
+
 char		*ft_strjoin_endl(char *s1, const char *s2)
 {
 	int		len1;
@@ -149,11 +176,11 @@ void		ft_c(t_printf *s)
 	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
 		return ;
 	tmp[0] = (char)va_arg(s->par, int);
-	s->str = ft_strjoin(s->str, &tmp[0]);
 	tmp[1] = '\0';
 	s->fmt += 1;
 	pad = ft_memset(pad, ' ', (s->width - 1));
 	s->str = ft_strjoin(s->str, pad);
+	s->str = ft_strjoin(s->str, &tmp[0]);
 	return ;
 }
 
@@ -168,10 +195,10 @@ void		ft_s(t_printf *s)
 	len = (len > s->width ? 0 : s->width - len);
 	if (!(pad = (char *)malloc(len * sizeof(char))))
 		return ;
-	s->str = ft_strjoin(s->str,tmp);
 	s->fmt += 1;
 	pad = ft_memset(pad, ' ', len);
 	s->str = ft_strjoin(s->str, pad);
+	s->str = ft_strjoin_n(s->str,tmp, s->precision);
 	return ;
 }
 
@@ -203,17 +230,18 @@ void		ft_d(t_printf *s)
 	char 	*pad;
 	int 	len;
 
+	printf("\nw : %d\np : %d",s->width, s->precision);
 	d = (int)va_arg(s->par, int);
 	tmp = ft_itoa_base(d, "0123456789");
 	len = ft_strlen(tmp);
 	len = (len > s->width ? 0 : s->width - len);
 	if (!(pad = (char *)malloc(len * sizeof(char))))
 		return ;
-	pad = ft_memset(pad, ' ', len - 1);
+	pad = ft_memset(pad, '0', len - 1);
 	tmp = ft_strjoin(pad, tmp);	
-	s->str = ft_strjoin(s->str, tmp);
 	s->fmt += 1;
-	pad = ft_memset(pad, ' ', len);
+	pad = ft_memset(pad, '0', len);
+	s->str = ft_strjoin_n(s->str,tmp, s->precision);
 	s->str = ft_strjoin(s->str, pad);
 	return ;
 }
@@ -289,6 +317,7 @@ void		ft_init_flags(t_printf *s)
 	s->sharp = 0;
 	s->star = 0;
 	s->width = 0;
+	s->precision = 0;
 	return ;
 }
 
@@ -335,12 +364,15 @@ void		ft_get_width(t_printf *s)
 	int width;
 
 	width = 0;
-	while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+	if (s->fmt[0] != '.')
 	{
-		width = (width * 10) + (s->fmt[0] - '0');
-		s->fmt++;
-	}
+		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+		{
+			width = (width * 10) + (s->fmt[0] - '0');
+			s->fmt++;
+		}
 	s->width = width;
+	}
 	return ;
 }
 
@@ -349,12 +381,16 @@ void		ft_get_precision(t_printf *s)
 	int pres;
 
 	pres = 0;
-	while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+	if (s->fmt[0] == '.')
 	{
-		pres = (pres * 10) + (s->fmt[0] - '0');
-		s->fmt++;
+			s->fmt++;
+		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
+		{
+			pres = (pres * 10) + (s->fmt[0] - '0');
+			s->fmt++;
+		}
+		s->precision = pres;
 	}
-	s->precision = pres;
 	return ;	
 }
 
