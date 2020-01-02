@@ -6,29 +6,29 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/04 16:41:52 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/02 13:52:35 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** 					% [flags][width][.precision][size][type]
 ** [FLAGS] = '-' / '+' / '0' / ' ' / '#'
-** [WIDTH] = unsigned integer indicates the minimum width 
+** [WIDTH] = unsigned integer indicates the minimum width
 ** [PRECISION] = unsigned integer indicate the precision after the '.'
 ** [SIZE] = converts the argument type in an other type ( l / ll / h / hh )
-** [TYPE] = c / s / p / d / i / u / x / X / n / f / e / g 
+** [TYPE] = c / s / p / d / i / u / x / X / n / f / e / g
 **-----------------------------------------------------------------------------
 **							Regular conversions
 **-----------------------------------------------------------------------------
-**	1) c = character 				| 2) s = string  
-**	3) p = pointer(hex) 			| 4) d = decimal signed integer 
-**	5) i = decimal signed integer	| 6) u = unsigned integer 
+**	1) c = character 				| 2) s = string
+**	3) p = pointer(hex) 			| 4) d = decimal signed integer
+**	5) i = decimal signed integer	| 6) u = unsigned integer
 **	7) x = hexadecimal integer		| 8) X = uppercase hexadecimal integer
 **-----------------------------------------------------------------------------
 **								Regular flags
 **-----------------------------------------------------------------------------
 **	1) '-' = left justify			| 2) '0' = padding with '0'
-**	3) '.' = precision 				| 4) '*' = padding or precision (arg+1) 
+**	3) '.' = precision 				| 4) '*' = padding or precision (arg+1)
 **-----------------------------------------------------------------------------
 **									BONUS
 **-----------------------------------------------------------------------------
@@ -42,13 +42,13 @@
 **							Bonus lenght flags
 **-----------------------------------------------------------------------------
 **	1) 'h'  = converts an integer from a short to an int.
-**	2) 'hh' = converts an integer from a char to an int.  
+**	2) 'hh' = converts an integer from a char to an int.
 **	3) 'l'  = converts an integer into a long.
 **	4) 'll' = converts an interger into a long long.
 **-----------------------------------------------------------------------------
 **							Bonus conversions flags
 **-----------------------------------------------------------------------------
-**	1) ''' = 
+**	1) ''' =
 **	2) '#' = value should be printed in an alternate form(prefix, precision)
 **	3) ' ' = Positive values begin with a blank.
 **	4) '+' = Prefix the output value with a sign (+ or -) if signed type.
@@ -76,6 +76,7 @@ typedef struct	s_struct
 	int			sharp;
 	int			star;
 	int			width;
+	int			dot;
 	int			precision;
 	va_list		par;
 }				t_printf;

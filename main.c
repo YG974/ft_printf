@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2019/12/04 17:00:46 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/02 16:51:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ int main(void)
 	int X = x;
 //	int len;
 
-	ft_printf("%9c", c);
-	ft_printf("\n%.4s", s);
-	ft_printf("\n%p", p);
-	ft_printf("\n%.9d", d);
-	ft_printf("\n%9i", i);
-	ft_printf("\n%9u", u);
-	ft_printf("\n%9x", x);
-	ft_printf("\n%9X", X);
+//	ft_printf("%c", c);
+	ft_printf("\n%s", s);
+//	ft_printf("\n%p", p);
+//	ft_printf("\n%d", d);
+//	ft_printf("\n%i", i);
+///	ft_printf("\n%u", u);
+//	ft_printf("\n%x", x);
+//	ft_printf("\n%X", X);
 	printf("\n----------------------------------------\n");
-	printf("%9c", c);
-	printf("\n%.4s", s);
+	printf("%c", c);
+	printf("\n%s", s);
 	printf("\n%p", p);
-	printf("\n%.9d",d);
-	printf("\n%.9i", i);
-	printf("\n%.9u", u);
-	printf("\n%.9x", x);
-	printf("\n%.9X\n", X);
+	printf("\n%d", d);
+	printf("\n%i", i);
+	printf("\n%u", u);
+	printf("\n%x", x);
+	printf("\n%X\n", X);
 
 /*
 	printf("c = %c\n", c);
