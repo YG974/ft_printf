@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/06 14:35:38 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/06 15:07:21 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,11 +174,11 @@ void		ft_padding(t_printf *s)
 	
 	s->tmp_len = ft_strlen(s->tmp);
 	s->tmp_len = (s->tmp_len > s->width ? s->width : s->tmp_len);
-	if (!(pad = (char *)ft_calloc((s->width - tmp_len + 1), sizeof(char))))
+	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
 	if (s->zero == 1)
 		pad = ft_memset(pad, '0', s->width - s->tmp_len);
-	else (s->width > 0)
+	else if (s->width > 0)
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	if (s->minus == 1)
 		s->tmp = ft_strjoin(s->tmp, pad);
@@ -195,6 +195,8 @@ void		ft_precision(t_printf *s)
 	
 	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
 		return ;
+	tmp = ft_strjoin(pad, tmp);
+	s->str = ft_strjoin_n(s->str, s->tmp, s->precision);
 
 	return ;
 }
@@ -217,18 +219,9 @@ void		ft_c(t_printf *s)
 
 void		ft_s(t_printf *s)
 {
-	char	*pad;
-	int		len;
-
 	s->tmp = ((char*)va_arg(s->par, char *));
-	len = ft_strlen(tmp);
-	len = (len > s->width ? 0 : s->width - len);
-	if (!(pad = (char *)malloc(len * sizeof(char))))
-		return ;
-	pad = ft_memset(pad, ' ', len);
-	pad = ft_memset(pad, '0', s->precision - ft_strlen(tmp));
-	s->tmp = ft_strjoin(pad, s->tmp);
-	s->str = ft_strjoin_n(s->str, s->tmp, ft_strlen(tmp));
+	ft_padding(s);
+	ft_precision(s);
 	s->fmt += 1;
 	return ;
 }
