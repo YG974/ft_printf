@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/02 16:41:43 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/02 15:47:57 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,37 @@ void		ft_get_type(t_printf *s)
 *******************************************************************************
 */
 
+void		ft_padding(t_printf *s)
+{
+	char *pad;
+	
+	s->tmp_len = ft_strlen(s->tmp);
+	s->tmp_len = (s->tmp_len > s->width ? s->width : s->tmp_len);
+	if (!(pad = (char *)ft_calloc((s->width - tmp_len + 1), sizeof(char))))
+		return ;
+	if (s->zero == 1)
+		pad = ft_memset(pad, '0', s->width - s->tmp_len);
+	else (s->width > 0)
+		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
+	if (s->minus == 1)
+		s->tmp = ft_strjoin(s->tmp, pad);
+	else 
+		s->tmp = ft_strjoin(pad, s->tmp);
+	s->str = ft_strjoin(s->str, s->tmp);
+
+	return ;
+}
+
+void		ft_precision(t_printf *s)
+{
+	char *pad;
+	
+	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
+		return ;
+
+	return ;
+}
+
 void		ft_c(t_printf *s)
 {
 	char tmp[2];
@@ -177,29 +208,27 @@ void		ft_c(t_printf *s)
 	tmp[1] = '\0';
 	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
 		return ;
-	pad = ft_memset(pad, ' ', s->width - 1);
+	if(s->width > 0)
+		pad = ft_memset(pad, ' ', s->width - 1);
 	s->str = ft_strjoin(tmp, pad);
-	printf("%s\n", pad);
-	printf("%s\n", tmp);
 	s->fmt += 1;
 	return ;
 }
 
 void		ft_s(t_printf *s)
 {
-	char	*tmp;
 	char	*pad;
 	int		len;
 
-	tmp = ((char*)va_arg(s->par, char *));
+	s->tmp = ((char*)va_arg(s->par, char *));
 	len = ft_strlen(tmp);
 	len = (len > s->width ? 0 : s->width - len);
 	if (!(pad = (char *)malloc(len * sizeof(char))))
 		return ;
 	pad = ft_memset(pad, ' ', len);
 	pad = ft_memset(pad, '0', s->precision - ft_strlen(tmp));
-	tmp = ft_strjoin(pad, tmp);
-	s->str = ft_strjoin_n(s->str, tmp, ft_strlen(tmp));
+	s->tmp = ft_strjoin(pad, s->tmp);
+	s->str = ft_strjoin_n(s->str, s->tmp, ft_strlen(tmp));
 	s->fmt += 1;
 	return ;
 }

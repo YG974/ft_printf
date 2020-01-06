@@ -26,7 +26,7 @@ int main(void)
 //	int len;
 
 //	ft_printf("%c", c);
-	ft_printf("\n%s", s);
+//	ft_printf("\n%s", s);
 //	ft_printf("\n%p", p);
 //	ft_printf("\n%d", d);
 //	ft_printf("\n%i", i);

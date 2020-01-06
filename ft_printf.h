@@ -69,6 +69,8 @@ typedef struct	s_struct
 {
 	char		*fmt;
 	char		*str;
+	char		*tmp;
+	int			tmp_len;
 	int			minus;
 	int			positive;
 	int			zero;
@@ -101,5 +103,7 @@ void	ft_n(t_printf *ptr);
 void	ft_f(t_printf *ptr);
 void	ft_e(t_printf *ptr);
 void	ft_g(t_printf *ptr);
+void	ft_precision(t_printf *ptr);
+void	ft_padding(t_printf *ptr);
 
 #endif
