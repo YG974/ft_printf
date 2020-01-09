@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/06 15:07:21 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/09 18:35:15 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void		ft_precision(t_printf *s)
 	
 	if (!(pad = (char *)ft_calloc((s->width - 1), sizeof(char))))
 		return ;
-	tmp = ft_strjoin(pad, tmp);
+	s->tmp = ft_strjoin(pad, s->tmp);
 	s->str = ft_strjoin_n(s->str, s->tmp, s->precision);
 
 	return ;
@@ -418,7 +418,7 @@ void		ft_get_width(t_printf *s)
 	int width;
 
 	width = 0;
-	if (s->width == 0)
+	if (s->width == 0 && s->dot == 0)
 	{
 		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
 		{
