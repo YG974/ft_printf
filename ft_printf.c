@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/21 18:46:07 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/28 16:20:20 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,13 +184,18 @@ void		ft_padding(t_printf *s)
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
+	s->str = ft_strjoin(s->str, s->tmp);
+//	printf("\ntmp :%s", s->tmp);
+//	printf("\npad :%s", pad);
 	return ;
 }
 
 void		ft_precision(t_printf *s)
 {
-	s->str = ft_strjoin_n(s->str, s->tmp, s->precision);
+	char *pad;
 
+	pad = NULL;
+	s->tmp = ft_strjoin_n(pad, s->tmp, s->precision);
 	return ;
 }
 
@@ -216,8 +221,8 @@ void		ft_c(t_printf *s)
 void		ft_s(t_printf *s)
 {
 	s->tmp = ((char*)va_arg(s->par, char *));
-	ft_padding(s);
 	ft_precision(s);
+	ft_padding(s);
 	s->fmt += 1;
 	return ;
 }
@@ -235,11 +240,15 @@ void		ft_p(t_printf *s)
 	len = (len > s->width ? 0 : s->width - len);
 	if (!(pad = (char *)malloc(len * sizeof(char))))
 		return ;
-	s->str = ft_strjoin(s->str, "0x");
-	pad = ft_memset(pad, ' ', len);
-	pad = ft_memset(pad, '0', s->precision - ft_strlen(tmp));
-	tmp = ft_strjoin(pad, tmp);
-	s->str = ft_strjoin_n(s->str, tmp, s->precision);
+	if(s->width > 0)
+		pad = ft_memset(pad, ' ', s->width - len);
+	tmp = ft_strjoin("0x", tmp);
+	if (s->minus == 1)
+		tmp = ft_strjoin(tmp, pad);
+	else 
+		tmp = ft_strjoin(pad, tmp);
+	s->str = ft_strjoin(s->str, tmp);
+	
 	s->fmt += 1;
 	return ;
 }
@@ -247,20 +256,11 @@ void		ft_p(t_printf *s)
 void		ft_d(t_printf *s)
 {
 	int		d;
-	char	*tmp;
-	char	*pad;
-	int		len;
 
 	d = (int)va_arg(s->par, int);
-	tmp = ft_itoa_base(d, "0123456789");
-	len = ft_strlen(tmp);
-	len = (len > s->width ? 0 : s->width - len);
-	if (!(pad = (char *)malloc(len * sizeof(char))))
-		return ;
-	pad = ft_memset(pad, ' ', len);
-	pad = ft_memset(pad, '0', s->precision - ft_strlen(tmp));
-	tmp = ft_strjoin(pad, tmp);
-	s->str = ft_strjoin_n(s->str, tmp, s->precision);
+	s->tmp = ft_itoa_base(d, "0123456789");
+	ft_padding(s);
+	ft_precision(s);
 	s->fmt += 1;
 	return ;
 }
@@ -374,9 +374,9 @@ int		ft_char_is_flag(t_printf *s)
 	char	*flags;
 	int		i;
 
-	flags = "-+0 #*.";
+	flags = "-+0 #*";
 	i = 0;
-	while (i < 7)
+	while (i < 6)
 	{
 		if (s->fmt[0] == flags[i])
 			return (1);
@@ -402,8 +402,6 @@ void		ft_get_flags(t_printf *s)
 			s->sharp = 1;
 		if (s->fmt[0] == '*')
 			s->star = 1;
-		if (s->fmt[0] == '.')
-			s->dot = 1;
 		s->fmt += 1;
 	}
 	return ;
@@ -431,6 +429,11 @@ void		ft_get_precision(t_printf *s)
 	int pres;
 
 	pres = 0;
+	if (s->fmt[0] == '.')
+	{
+		s->dot = 1;
+		s->fmt += 1;
+	}
 	if (s->dot == 1)
 	{
 		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
