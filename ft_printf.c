@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/28 20:35:32 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/29 16:38:25 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -456,17 +456,19 @@ int			ft_printf(const char *format, ...)
 	va_start(s.par, format);
 	while (s.fmt[0])
 	{
+		//s.str = ft_strjoin_n(s.str, s.fmt, ft_int_strchr(s.fmt, '%'));
 		s.str = ft_strjoin_endl(s.str, s.fmt);
 		s.fmt += ft_int_strchr(s.fmt, '%') + 1;
 		ft_get_flags(&s);
-		ft_get_width(&s);
 		ft_get_precision(&s);
+		ft_get_width(&s);
 //		ft_get_size(&s);
 		ft_get_type(&s);
 		if (ft_int_strchr(s.fmt, '%') == -1)
-			s.str = ft_strjoin_endl(s.str, s.fmt);
-		if (ft_int_strchr(s.fmt, '%') == -1)
-			break;
+		{
+			s.str = ft_strjoin(s.str, s.fmt);
+			s.fmt += ft_int_strchr(s.fmt, '\0');
+		}
 	}
 	ft_putstr_fd(s.str, 1);
 	return (ft_strlen(s.str));
