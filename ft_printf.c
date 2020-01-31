@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/30 19:52:49 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/01/31 15:48:53 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ char		*ft_strjoin_n(char *s1, char *s2, int n)
 	int		i;
 	char	*str;
 
-	len1 = (s1 == NULL ? 1 : ft_strlen(s1));
-	len2 =  n;
+	len1 = 0;
+	len2 = (n > ft_strlen(s2) ? ft_strlen(s2) : n);
 	i = 0;
 	if (!(str = malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
@@ -149,8 +149,8 @@ void		ft_get_type(t_printf *s)
 		ft_x(s);
 	if (s->fmt[0] == 'X')
 		ft_x_up(s);
-	if (s->fmt[0] == '%')
-		ft_pourcent(s);
+	//if (s->fmt[0] == '%')
+	//	ft_pourcent(s);
 	return ;
 }
 
@@ -177,8 +177,6 @@ void		ft_padding(t_printf *s)
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
 	s->str = ft_strjoin(s->str, s->tmp);
-//	printf("\ntmp :%s", s->tmp);
-//	printf("\npad :%s", pad);
 	return ;
 }
 
@@ -188,6 +186,8 @@ void		ft_precision(t_printf *s)
 
 	if (!(pad = (char *)ft_calloc(1 , sizeof(char))))
 		return ;
+	if (s->precision < 0)
+		s->precision = 0;
 	s->tmp = ft_strjoin_n(pad, s->tmp, s->precision);
 	return ;
 }
@@ -407,7 +407,12 @@ void		ft_get_width(t_printf *s)
 
 	width = 0;
 	if (s->star == 1)
+	{
 		s->width = (int)va_arg(s->par, int);
+		if (s->width < 0)
+			s->width = 0;
+		return ;	
+	}
 	if (s->width == 0 && s->dot == 0)
 	{
 		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
@@ -425,8 +430,11 @@ void		ft_get_precision(t_printf *s)
 	int pres;
 
 	pres = 0;
-	if (s->star == 1)
+	if (s->star == 1 && s->dot == 1)
+	{
 		s->precision = (int)va_arg(s->par, int);
+		return ;	
+	}
 	if (s->fmt[0] == '.')
 	{
 		s->dot = 1;
