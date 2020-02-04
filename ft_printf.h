@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/28 17:13:49 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/04 21:21:44 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	ft_init_flags(t_printf *ptr);
 int		ft_char_is_flag(t_printf *ptr);
 void	ft_get_type(t_printf *ptr);
 void	ft_get_precision(t_printf *s);
+void	ft_get_precision2(t_printf *s);
 char	*ft_itoa_base(long	nbr, char *base);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
@@ -105,5 +106,6 @@ void	ft_e(t_printf *ptr);
 void	ft_g(t_printf *ptr);
 void	ft_precision(t_printf *ptr);
 void	ft_padding(t_printf *ptr);
+void	ft_pourcent(t_printf *ptr);
 
 #endif

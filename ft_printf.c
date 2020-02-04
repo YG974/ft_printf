@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/04 21:08:38 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/04 23:15:30 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,11 +188,6 @@ void		ft_precision(t_printf *s)
 	char *pad;
 
 	ft_get_precision(s);
-	if (s->fmt[0] == '*')
-	{
-		s->star = 1;
-		s->fmt++;
-	}
 	if (!(pad = (char *)ft_calloc(1 , sizeof(char))))
 		return ;
 	if (s->precision < 0)
@@ -399,7 +394,7 @@ void		ft_get_width(t_printf *s)
 	int width;
 
 	width = 0;
-	if (s->star == 1)
+	if (s->star == 1 && s->dot == 0)
 	{
 		s->width = (int)va_arg(s->par, int);
 		if (s->width < 0)
@@ -426,11 +421,6 @@ void		ft_get_precision(t_printf *s)
 	int pres;
 
 	pres = 0;
-	if (s->star == 1 && s->dot == 1)
-	{
-		s->precision = (int)va_arg(s->par, int);
-		return ;	
-	}
 	if (s->fmt[0] == '.')
 	{
 		s->dot = 1;
@@ -445,6 +435,24 @@ void		ft_get_precision(t_printf *s)
 		}
 		s->precision = pres;
 	}
+	ft_get_precision2(s);
+	return ;
+}
+
+void		ft_get_precision2(t_printf *s)
+{
+	int pres;
+
+	pres = 0;
+	if (s->fmt[0] == '*' && s->dot == 1)
+	{
+		s->star = 1;
+		s->fmt++;
+		pres = (int)va_arg(s->par, int);
+		if (pres < 0)
+			pres = -pres;
+		s->precision = pres;	
+	}	
 	return ;
 }
 
