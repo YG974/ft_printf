@@ -6,66 +6,54 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/01/02 16:51:42 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/09 17:37:14 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdio.h>
 #include "ft_printf.h"
 
 int main(void)
 {
-	char c = 'z';
-	char *s = "Melimelow";
-	char *p = s;
-	int d = 12945;
-	int i = 8001;
-	unsigned int u = 14654;
-	int x = 2397;
-	int X = x;
-//	int len;
+	int		a = -4;
+	int		b = 0;
+	char	c = 'a';
+	int		d = 2147483647;
+	int		e = -2147483648;
+	int		f = 42;
+	int		g = 25;
+	int		h = 4200;
+	int		i = 8;
+	int		j = -12;
+	int		k = 123456789;
+	int		l = 0;
+	int		m = -12345678;
+	char	*n = "abcdefghijklmnop";
+	char	*o = "-a";
+	char	*p = "-12";
+	char	*q = "0";
+	char	*r = "%%";
+	char	*s = "-2147483648";
+	char	*t = "0x12345678";
+	char	*u = "-0";
+	int		nb = 34;
+	int 	t1 = 10;
+	int 	t2 = 118;
 
-//	ft_printf("%c", c);
-//	ft_printf("\n%s", s);
-//	ft_printf("\n%p", p);
-//	ft_printf("\n%d", d);
-//	ft_printf("\n%i", i);
-///	ft_printf("\n%u", u);
-//	ft_printf("\n%x", x);
-//	ft_printf("\n%X", X);
-	printf("\n----------------------------------------\n");
-	printf("%c", c);
-	printf("\n%s", s);
-	printf("\n%p", p);
-	printf("\n%d", d);
-	printf("\n%i", i);
-	printf("\n%u", u);
-	printf("\n%x", x);
-	printf("\n%X\n", X);
+	a = 3;
+	ft_printf("%.*i, %.*d, %.*d, %.*d, %.*d, %.*d", a, i, a, j, a, k, a, l, a, m, a, c);
+/*	a = -2;
+	while(a < 5) //T70-177
+	{
+		b = -2;
+		while (b < 5)
+		{
+			ft_printf(" --- Return : %d\n", ft_printf("%*.*i, %*.*d, %*.*d, %*.*d, %*.*d, %*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
+			ft_printf(" --- Return : %d\n", ft_printf("%-*.*i, %-*.*d, %-*.*d, %-*.*d, %-*.*d, %-*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
+			ft_printf(" --- Return : %d\n", ft_printf("%0*.*i, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
+			b++;
+		}
+		a++;
 
-/*
-	printf("c = %c\n", c);
-	printf("s = %s\n", s);
-	printf("p = %p\n", p);
-	printf("d = %15d\n", d);
-	printf("i = %i\n", i);
-	printf("u = %u\n", u);
-	printf("x = %x\n", x);
-	printf("X = %X\n", X);
-	len = printf("%% = %s\n", "%");
-	printf("s = %.5s\n", s);
-	printf("s = %.*s\n",4, s);
-	printf("d = %.8d\n", d);
-	printf("d = %.*d\n",3, d);
-	printf("s = %-.5s\n", s);
-	printf("s = %-.*s\n",4, s);
-	printf("u = %-.8d\n", u);
-	printf("u = %-.*d\n",3, u);
-	printf("d = %+d\n", d);
-	printf("d = %+d\n", d);
-	printf("u = %d\n", u);
-	printf("u = % *d\n",9, u);
-	printf("printf : len = %d\n", len);
-*/
+	}*/
 	return (0);
 }

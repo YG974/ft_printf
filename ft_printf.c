@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/04 23:15:30 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/09 17:41:35 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,13 +172,17 @@ void		ft_padding(t_printf *s)
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
 	if (s->zero == 1 && s->star != 2)
-		pad = ft_memset(pad, '0', s->width - s->tmp_len);
+		pad = ft_memset(pad, '0', s->width - s->tmp_len + s->sign );
+	else if (s->width < s->precision)
+		pad = ft_memset(pad, '0', ((s->precision - s->tmp_len - 1 - s->sign) > 0 ? s->precision - s->tmp_len - 1 - s->sign : 0));
 	else if (s->width > 0 )
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	if (s->minus == 1 || s->star == 2)
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
+	if (s->sign == 1)
+		s->tmp = ft_strjoin("-", s->tmp);
 	s->str = ft_strjoin(s->str, s->tmp);
 	return ;
 }
@@ -278,6 +282,11 @@ void		ft_d(t_printf *s)
 	int		d;
 
 	d = (int)va_arg(s->par, int);
+/*	if (d < 0)
+	{
+		s->sign = 1;
+		d = -d;
+	}*/
 	if (d == 0)
 	{
 		if (!(s->tmp = (char *)malloc(2 * sizeof(char))))
@@ -348,6 +357,7 @@ void		ft_init_flags(t_printf *s)
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
+	s->sign = 0;
 	return ;
 }
 
@@ -367,43 +377,12 @@ int		ft_char_is_flag(t_printf *s)
 	return (0);
 }
 
-void		ft_get_flags(t_printf *s)
-{
-	ft_init_flags(s);
-	while (ft_char_is_flag(s) > 0)
-	{
-		if (s->fmt[0] == '-')
-			s->minus = 1;
-		if (s->fmt[0] == '+')
-			s->positive = 1;
-		if (s->fmt[0] == '0')
-			s->zero = 1;
-		if (s->fmt[0] == ' ')
-			s->space = 1;
-		if (s->fmt[0] == '#')
-			s->sharp = 1;
-		if (s->fmt[0] == '*')
-			s->star = 1;
-		s->fmt += 1;
-	}
-	return ;
-}
 
 void		ft_get_width(t_printf *s)
 {
 	int width;
 
 	width = 0;
-	if (s->star == 1 && s->dot == 0)
-	{
-		s->width = (int)va_arg(s->par, int);
-		if (s->width < 0)
-		{
-			s->width = -s->width;
-			s->star = 2;
-		return ;	
-		}
-	}
 	if (s->width == 0 && s->dot == 0)
 	{
 		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
@@ -450,7 +429,10 @@ void		ft_get_precision2(t_printf *s)
 		s->fmt++;
 		pres = (int)va_arg(s->par, int);
 		if (pres < 0)
+		{
 			pres = -pres;
+			s->zero = 1;
+		}
 		s->precision = pres;	
 	}	
 	return ;
@@ -469,7 +451,7 @@ int			ft_printf(const char *format, ...)
 	//	s.str = ft_strjoin_n(s.str, s.fmt, ft_int_strchr(s.fmt, '%'));
 		s.str = ft_strjoin_endl(s.str, s.fmt);
 		s.fmt += ft_int_strchr(s.fmt, '%') + 1;
-		ft_get_flags(&s);
+		ft_parsing(&s);
 		ft_get_precision(&s);
 		ft_get_width(&s);
 //		ft_get_size(&s);
@@ -483,4 +465,59 @@ int			ft_printf(const char *format, ...)
 	va_end(s.par);
 	ft_putstr_fd(s.str, 1);
 	return (ft_strlen(s.str));
+}
+
+
+void		ft_parsing(t_printf *s)
+{
+	ft_get_flags(s);
+		
+}
+
+void		ft_get_flags(t_printf *s)
+{
+	ft_init_flags(s);
+	while (ft_char_is_flag(s) > 0)
+	{
+		if (s->fmt[0] == '-')
+			s->minus = 1;
+		if (s->fmt[0] == '+')
+			s->positive = 1;
+		if (s->fmt[0] == '0')
+			s->zero = 1;
+		if (s->fmt[0] == ' ')
+			s->space = 1;
+		if (s->fmt[0] == '#')
+			s->sharp = 1;
+		if (s->fmt[0] == '*')
+			ft_star(s);
+		s->fmt += 1;
+	}
+	if (s->fmt[0] == '.' && s->star > 0)
+		ft_preci_star(s);
+		
+	return ;
+}
+
+void		ft_star(t_printf *s)
+{
+	s->star = 1;
+	s->width = (int)va_arg(s->par, int);
+	if (s->width < 0)
+	{
+		s->width = -s->width;
+		s->star = 2;
+	}
+	return ;	
+}
+
+
+void		ft_preci_star(t_printf *s)
+{
+	if (s->fmt[0] == '*')
+	{
+		s->precision = (int)va_arg(s->par, int);
+		s->fmt++;	
+	}
+
 }
