@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 20:30:26 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/10 21:04:19 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,7 +298,14 @@ void		ft_padding2(t_printf *s)
 	printf("\nstmp :%s\n", s->tmp);
 	printf("\nlen :%d\n-----------------", l);
 */
-	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
+/*
+	printf("\nW :%d\n", s->width);
+	printf("\nSW :%d\n", s->wstar);
+	printf("\nP :%d\n", s->precision);
+	printf("\nM :%d\n", s->minus);
+	printf("\nS :%d\n-----------------------------", s->star);
+*/
+if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
 	if (s->zero == 1  && s->wstar != 1 && s->dot == 0)
 		pad = ft_memset(pad, '0', s->width - s->tmp_len);
@@ -316,7 +323,9 @@ void		ft_padding2(t_printf *s)
 		}
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	}
-	if (s->minus == 1 || s->wstar == 1)
+	if (s->precision > 0)
+		s->tmp = ft_strjoin(pad, s->tmp);
+	else if (s->minus == 1 || s->wstar == 1)
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
