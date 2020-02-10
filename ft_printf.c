@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 18:37:43 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/10 20:30:26 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,9 +300,9 @@ void		ft_padding2(t_printf *s)
 */
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
-	if (s->zero == 1  && s->wstar != 0 && s->dot == 1)
+	if (s->zero == 1  && s->wstar != 1 && s->dot == 0)
 		pad = ft_memset(pad, '0', s->width - s->tmp_len);
-	else if (s->width < s->precision && s->star != 0 && s->dot == 1)
+	else if (s->width <= s->precision && s->dot == 1)
 	{
 		pad = ft_memset(pad, '0', ((s->precision - ft_strlen(s->tmp) + s->sign > 0 ? s->precision - ft_strlen(s->tmp)  : 0)));
 	//	printf("\n%d\n", s->sign);
