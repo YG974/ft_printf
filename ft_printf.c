@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 17:59:47 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:37:43 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,20 +291,23 @@ void		ft_padding2(t_printf *s)
 	s->tmp_len = (l > s->width ? s->width : l);
 /*
 	printf("\nW :%d\n", s->width);
+	printf("\nP :%d\n", s->precision);
+	printf("\nS :%d\n", s->star);
 	printf("\nstmplen : %d\n", s->tmp_len);
+	printf("\nZ : %d\n", s->zero);
 	printf("\nstmp :%s\n", s->tmp);
 	printf("\nlen :%d\n-----------------", l);
 */
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
-	if (s->zero == 1 && s->star != 2)
+	if (s->zero == 1  && s->wstar != 0 && s->dot == 1)
 		pad = ft_memset(pad, '0', s->width - s->tmp_len);
-	else if (s->width < s->precision)
+	else if (s->width < s->precision && s->star != 0 && s->dot == 1)
 	{
 		pad = ft_memset(pad, '0', ((s->precision - ft_strlen(s->tmp) + s->sign > 0 ? s->precision - ft_strlen(s->tmp)  : 0)));
 	//	printf("\n%d\n", s->sign);
 	}
-	else if (s->width > 0) 
+	else if (s->width > 0 || s->wstar == 1) 
 	{	
 		if (s->sign == 1)
 		{
@@ -313,7 +316,7 @@ void		ft_padding2(t_printf *s)
 		}
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	}
-	if (s->minus == 1 || s->star == 2)
+	if (s->minus == 1 || s->wstar == 1)
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
@@ -414,6 +417,7 @@ void		ft_init_flags(t_printf *s)
 	s->space = 0;
 	s->sharp = 0;
 	s->star = 0;
+	s->wstar = 0;
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
@@ -490,7 +494,7 @@ void		ft_get_precision2(t_printf *s)
 		pres = (int)va_arg(s->par, int);
 		if (pres < 0)
 		{
-			pres = -pres;
+			pres = 1;
 			s->zero = 1;
 		}
 		s->precision = pres;	
@@ -561,12 +565,11 @@ void		ft_get_flags(t_printf *s)
 
 void		ft_star(t_printf *s)
 {
-	s->star = 1;
 	s->width = (int)va_arg(s->par, int);
 	if (s->width < 0)
 	{
 		s->width = -s->width;
-		s->star = 2;
+		s->wstar = 1;
 	}
 	return ;	
 }
