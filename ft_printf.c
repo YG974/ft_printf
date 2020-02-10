@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 21:04:19 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/10 21:13:30 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,11 +323,13 @@ if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		}
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	}
-	if (s->precision > 0)
+	if ((s->minus == 1 || s->wstar == 1) && s->width > s->precision )
+		s->tmp = ft_strjoin(s->tmp, pad);
+/*	if (s->precision > 0)
 		s->tmp = ft_strjoin(pad, s->tmp);
 	else if (s->minus == 1 || s->wstar == 1)
 		s->tmp = ft_strjoin(s->tmp, pad);
-	else 
+*/	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
 	if (s->sign == 1)
 		s->tmp = ft_strjoin("-", s->tmp);
