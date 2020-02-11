@@ -6,38 +6,36 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:46 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 14:36:58 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/11 15:47:14 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		ft_padding(t_printf *s)
+void		ft_spadding(t_printf *s)
 {
 	char *pad;
+	int		l;
 
-	s->tmp_len = ft_strlen(s->tmp);
-	s->tmp_len = (s->tmp_len > s->width ? s->width : s->tmp_len);
+	l = ft_strlen(s->tmp);
+	if (s->precision > l || s->zero == 1)
+		ft_padding_precision(s);
+	s->tmp_len = (ft_strlen(s->tmp) > s->width ? s->width : ft_strlen(s->tmp));
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
-	if (s->zero == 1 && s->star != 2)
-		pad = ft_memset(pad, '0', s->width - s->tmp_len);
-	else if (s->width < s->precision)
-		pad = ft_memset(pad, '0', ((s->precision - ft_strlen(s->tmp) + s->sign
-		> 0 ? s->precision - ft_strlen(s->tmp) + s->sign : 0)));
-	else if (s->width > 0)
+	if ((s->width > 0))
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
-	if (s->minus == 1 || s->star == 2)
+	if ((s->minus == 1 || s->wstar == 1))
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else
 		s->tmp = ft_strjoin(pad, s->tmp);
-	if (s->sign == 1)
-		s->tmp = ft_strjoin("-", s->tmp);
 	s->str = ft_strjoin(s->str, s->tmp);
 	return ;
+
+
 }
 
-void		ft_precision(t_printf *s)
+void		ft_sprecision(t_printf *s)
 {
 	char *pad;
 

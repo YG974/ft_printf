@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 15:12:35 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/11 15:20:04 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void		ft_c(t_printf *s)
 void		ft_s(t_printf *s)
 {
 	s->tmp = ((char*)va_arg(s->par, char *));
-	ft_padding2(s);
-	ft_precision2(s);
+	ft_spadding(s);
+	ft_sprecision(s);
 	s->fmt += 1;
 	return ;
 }
