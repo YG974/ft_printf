@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 10:32:49 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/11 13:44:04 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,16 +169,12 @@ void		ft_padding(t_printf *s)
 	
 	s->tmp_len = ft_strlen(s->tmp);
 	s->tmp_len = (s->tmp_len > s->width ? s->width : s->tmp_len);
-//	printf("\n%c\n", s->tmp[0]);
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
 	if (s->zero == 1 && s->star != 2)
 		pad = ft_memset(pad, '0', s->width - s->tmp_len);
 	else if (s->width < s->precision)
-	{
 		pad = ft_memset(pad, '0', ((s->precision - ft_strlen(s->tmp) + s->sign > 0 ? s->precision - ft_strlen(s->tmp) + s->sign : 0)));
-	//	printf("\n%d\n", s->sign);
-	}
 	else if (s->width > 0 )
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	if (s->minus == 1 || s->star == 2)
@@ -288,7 +284,7 @@ void		ft_padding_precision(t_printf *s)
 	int		l;
 
 	l = 0;
-	if (s->precision > l - s->sign)
+	if ((s->precision > l - s->sign && s->dot == 1) || s->wstar == 1)
 	{
 		l = ft_strlen(s->tmp);
 		l = ( l > s->precision ? s->precision : l);
@@ -297,9 +293,9 @@ void		ft_padding_precision(t_printf *s)
 		pad = ft_memset(pad, '0', s->precision - l);
 		s->tmp = ft_strjoin(pad, s->tmp);
 	}
-	else if (s->zero == 1 && s->width > 0 && s->wstar == 0)
+	else if ((s->zero == 1 && s->width > 0) && (s->wstar == 0 || s->pstar == 1))
 	{
-		l = ft_strlen(s->tmp);
+		l = ft_strlen(s->tmp) + s->sign;
 		l = ( l > s->width ? s->width : l);
 		if (!(pad = (char *)ft_calloc((s->width - l + 1), sizeof(char))))
 			return ;
@@ -322,16 +318,16 @@ void		ft_padding2(t_printf *s)
 		return ;
 	else if (s->width <= s->precision && s->dot == 1 && s->zero)
 		pad = ft_memset(pad, '0', ((s->precision - l > 0 ? s->precision - ft_strlen(s->tmp)  : 0)));
-	if ((s->width > 0 && s->width > s->precision )) 
+	if ((s->width > 0 && s->width > s->precision  && s->precision >= 0) || s->wstar == 1) 
 	{	
 		if (s->sign == 1)
 		{
 		s->tmp = ft_strjoin("-", s->tmp);
 		s->sign = 0;
 		}
-		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
+		pad = ft_memset(pad, ' ', s->width - s->tmp_len - s->sign);
 	}
-	if ((s->minus == 1 || s->wstar == 1) && s->width > s->precision )
+	if ((s->minus == 1 || s->wstar == 1))
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else 
 		s->tmp = ft_strjoin(pad, s->tmp);
@@ -511,6 +507,7 @@ void		ft_get_precision2(t_printf *s)
 		{
 			pres = 1;
 			s->zero = 1;
+			s->pstar = 1;
 		}
 		s->precision = pres;	
 	}	
