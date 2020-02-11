@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 08:35:31 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/11 10:32:49 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,13 +286,26 @@ void		ft_padding_precision(t_printf *s)
 {
 	char *pad;
 	int		l;
-	
-	l = ft_strlen(s->tmp);
-	l = ( l > s->precision ? s->precision : l);
-	if (!(pad = (char *)ft_calloc((s->precision - l + 1), sizeof(char))))
-		return ;
-	pad = ft_memset(pad, '0', s->precision - l);
-	s->tmp = ft_strjoin(pad, s->tmp);
+
+	l = 0;
+	if (s->precision > l - s->sign)
+	{
+		l = ft_strlen(s->tmp);
+		l = ( l > s->precision ? s->precision : l);
+		if (!(pad = (char *)ft_calloc((s->precision - l + 1), sizeof(char))))
+			return ;
+		pad = ft_memset(pad, '0', s->precision - l);
+		s->tmp = ft_strjoin(pad, s->tmp);
+	}
+	else if (s->zero == 1 && s->width > 0 && s->wstar == 0)
+	{
+		l = ft_strlen(s->tmp);
+		l = ( l > s->width ? s->width : l);
+		if (!(pad = (char *)ft_calloc((s->width - l + 1), sizeof(char))))
+			return ;
+		pad = ft_memset(pad, '0', s->width - l);
+		s->tmp = ft_strjoin(pad, s->tmp);
+	}
 	return ;	
 }
 void		ft_padding2(t_printf *s)
@@ -301,14 +314,15 @@ void		ft_padding2(t_printf *s)
 	int		l;
 	
 	l = ft_strlen(s->tmp) + s->sign;
-	if (s->precision > l - s->sign)
+	if (s->precision > l - s->sign || s->zero == 1)
 		ft_padding_precision(s);
-	s->tmp_len = (l > s->width ? s->width : l);
+	s->tmp_len = (ft_strlen(s->tmp) + s->sign > s->width ? 
+					s->width : ft_strlen(s->tmp) + s->sign);
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
-	if (s->width <= s->precision && s->dot == 1)
+	else if (s->width <= s->precision && s->dot == 1 && s->zero)
 		pad = ft_memset(pad, '0', ((s->precision - l > 0 ? s->precision - ft_strlen(s->tmp)  : 0)));
-	else if ((s->width > 0 && s->width > s->precision )|| s->wstar == 1) 
+	if ((s->width > 0 && s->width > s->precision )) 
 	{	
 		if (s->sign == 1)
 		{
