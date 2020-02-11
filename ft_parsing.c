@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 14:38:50 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:44:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		ft_init_flags(t_printf *s)
 	s->sharp = 0;
 	s->star = 0;
 	s->wstar = 0;
+	s->pstar = 0;
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
