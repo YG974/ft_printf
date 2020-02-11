@@ -6,7 +6,7 @@
 #    By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/26 19:33:02 by ygeslin           #+#    #+#              #
-#    Updated: 2020/01/28 17:13:16 by ygeslin          ###   ########.fr        #
+#    Updated: 2020/02/11 15:07:22 by ygeslin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,12 @@ SRCS    =	libft/ft_isascii.c \
 			libft/ft_lstiter_bonus.c \
 			libft/ft_lstmap_bonus.c \
 			ft_printf.c \
+			ft_utils.c \
+			ft_parsing.c \
+			ft_parsing2.c \
+			ft_padding.c \
+			ft_type.c \
+			ft_type2.c \
 
 SRCDIR    = ./
 CC        = gcc
@@ -67,7 +73,7 @@ $(SRCDIR)%.o:    $(SRCDIR)%.c
 $(NAME):         $(OBJ)
 	ar rc $(NAME) $(OBJ)
 
-all:             $(NAME)
+all:	$(NAME)
 
 clean:
 	rm -f $(OBJ)
@@ -77,5 +83,8 @@ fclean:         clean
 
 re:             fclean all
 
+test:	${NAME}
+	gcc ${NAME} main.c 
+	./a.out
 .PHONY:            all clean fclean re
 
