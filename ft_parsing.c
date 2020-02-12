@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 17:44:42 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/12 17:08:34 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void		ft_get_flags(t_printf *s)
 void		ft_star(t_printf *s)
 {
 	s->width = (int)va_arg(s->par, int);
+	s->wstar = 1;
 	if (s->width < 0)
 	{
 		s->width = -s->width;
-		s->wstar = 1;
+		s->neg_width = 1;
 	}
 	return ;
 }
@@ -57,6 +58,8 @@ void		ft_preci_star(t_printf *s)
 	if (s->fmt[0] == '*')
 	{
 		s->precision = (int)va_arg(s->par, int);
+		s->pdot = 1;
+		s->pstar = 1;
 		s->fmt++;
 	}
 	return ;
@@ -72,9 +75,12 @@ void		ft_init_flags(t_printf *s)
 	s->star = 0;
 	s->wstar = 0;
 	s->pstar = 0;
+	s->pdot = 0;
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
 	s->sign = 0;
+	s->neg_width = 0;
+	s->neg_precision = 0;
 	return ;
 }

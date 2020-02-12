@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 17:14:12 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/12 17:02:36 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct	s_struct
 	char		*fmt;
 	char		*str;
 	char		*tmp;
-	int			nb_arg;
 	int			tmp_len;
 	int			sign;
 	int			minus;
@@ -79,8 +78,13 @@ typedef struct	s_struct
 	int			space;
 	int			sharp;
 	int			star;
+	int 		pstar;
+	int 		wstar;
 	int			width;
+	int			neg_width;
+	int			neg_precision;
 	int			dot;
+	int			pdot;
 	int			precision;
 	va_list		par;
 }				t_printf;
@@ -90,12 +94,16 @@ void	ft_get_flags(t_printf *ptr);
 void	ft_init_flags(t_printf *ptr);
 int		ft_char_is_flag(t_printf *ptr);
 void	ft_get_type(t_printf *ptr);
+void	ft_get_width(t_printf *ptr);
 void	ft_get_precision(t_printf *s);
 void	ft_get_precision2(t_printf *s);
 void	ft_parsing(t_printf *s);
 void	ft_star(t_printf *s);
 void	ft_preci_star(t_printf *s);
+int		ft_int_strchr(const char *s, int c);
 char	*ft_itoa_base(long	nbr, char *base);
+char	*ft_strjoin_endl(char *s1, const char *s2);
+char	*ft_strjoin_n(char *s1, char *s2, int n);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
 void	ft_p(t_printf *ptr);
@@ -111,8 +119,11 @@ void	ft_e(t_printf *ptr);
 void	ft_g(t_printf *ptr);
 void	ft_precision(t_printf *ptr);
 void	ft_padding(t_printf *ptr);
+void	ft_padding_precision(t_printf *ptr);
 void	ft_precision2(t_printf *ptr);
 void	ft_padding2(t_printf *ptr);
+void	ft_sprecision(t_printf *ptr);
+void	ft_spadding(t_printf *ptr);
 void	ft_pourcent(t_printf *ptr);
 
 #endif
