@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:27:45 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 19:55:06 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/12 20:02:35 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,22 @@
 void		ft_p(t_printf *s)
 {
 	long	ptr;
-	char	*tmp;
-	char	*pad;
-	int		len;
 
 	ptr = (long)va_arg(s->par, long);
-	tmp = ft_itoa_base(ptr, "0123456789abcdef");
-	len = ft_strlen(tmp) + 2;
-	len = (len > s->width ? 0 : s->width - len);
-	if (!(pad = (char *)malloc(len * sizeof(char))))
-		return ;
-	if (s->width > 0)
-		pad = ft_memset(pad, ' ', s->width - len);
-	tmp = ft_strjoin("0x", tmp);
-	if (s->minus == 1)
-		tmp = ft_strjoin(tmp, pad);
-	else
-		tmp = ft_strjoin(pad, tmp);
-	s->str = ft_strjoin(s->str, tmp);
+	if (ptr == 0)
+	{
+		if (!(s->tmp = (char *)malloc(2 * sizeof(char))))
+			return ;
+		s->tmp[0] = '0';
+		s->tmp[1] = '\0';
+		if (s->dot == 1 && s->precision == 0)
+			s->tmp[0] = '\0';
+	}
+	else 
+		s->tmp = ft_itoa_base(ptr, "0123456789abcdef");
+	s->tmp = ft_strjoin("0x", s->tmp);
+	ft_padding2(s);
+	ft_precision2(s);
 	s->fmt += 1;
 	return ;
 }
