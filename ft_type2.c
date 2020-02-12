@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:27:45 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 19:34:16 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/12 19:49:41 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void		ft_x(t_printf *s)
 {
 	unsigned int	l;
 
-	l = (unsigned int)va_arg(s->par, unsigned int);
+	l = (unsigned )va_arg(s->par, unsigned int);
 	if (l == 0)
 	{
 		if (!(s->tmp = (char *)malloc(2 * sizeof(char))))
@@ -98,8 +98,8 @@ void		ft_x(t_printf *s)
 	}
 	else
 		s->tmp = ft_itoa_base(l, "0123456789abcdef");
-	ft_precision2(s);
 	ft_padding2(s);
+	ft_precision2(s);
 	s->fmt += 1;
 	return ;
 }
@@ -118,8 +118,8 @@ void		ft_x_up(t_printf *s)
 	}
 	else
 		s->tmp = ft_itoa_base(l, "0123456789ABCDEF");
-	ft_precision2(s);
 	ft_padding2(s);
+	ft_precision2(s);
 	s->fmt += 1;
 	return ;
 }
