@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:46 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 15:22:44 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 15:25:02 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void		ft_padding_precision(t_printf *s)
 		pad = ft_memset(pad, '0', s->width - l);
 		s->tmp = ft_strjoin(pad, s->tmp);
 	}
-	if ((s->zero == 1 && s->width > 0  && s->dot == 0 && s->neg_width == 0))
+	if ((s->zero == 1 && s->width > 0  && s->dot == 0 && s->neg_width == 0 
+		&& s->minus == 0))
 	{
 		l = ft_strlen(s->tmp) + s->sign;
 		l = (l > s->width ? s->width : l);
