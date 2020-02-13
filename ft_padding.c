@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:46 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 15:55:26 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:43:33 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		ft_spadding(t_printf *s)
 	s->tmp_len = (ft_strlen(s->tmp) > s->width ? s->width : ft_strlen(s->tmp));
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len + 1), sizeof(char))))
 		return ;
-		if ((s->width > 0 && s->width > s->precision && s->precision >= 0) || s->wstar == 1)
+		if ((s->width > 0 && s->precision >= 0) || s->wstar == 1)
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len);
 	if ((s->minus == 1  || s->neg_width == 1 ))
 		s->tmp = ft_strjoin(s->tmp, pad);
