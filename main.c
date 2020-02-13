@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 16:22:10 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:10:38 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int main(void)
 
 		a = -2;
 		b = 2;
-ft_printf("%.2s%.7s", "hello", "world");
+	printf(" --- Return : %d\n", printf("%%%dbada%s%%**%s**-d%%0*d%-12s0*@", h, "bada", r, p, r, r, i, r, i, r, i));
+
 	return (0);
 }

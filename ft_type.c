@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 16:49:08 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:07:03 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void		ft_get_type(t_printf *s)
 {
-	if (s->fmt[0] == '%')
-		ft_pourcent(s);
 	if (s->fmt[0] == '.')
 		ft_get_precision(s);
 	if (s->fmt[0] == 'c')
@@ -32,25 +30,21 @@ void		ft_get_type(t_printf *s)
 		ft_x(s);
 	if (s->fmt[0] == 'X')
 		ft_x_up(s);
+	if (s->fmt[0] == '%')
+		ft_pourcent(s);
 	return ;
 }
 
 void		ft_pourcent(t_printf *s)
-{
-	char tmp[2];
-	char *pad;
+{	char tmp;
 
-	tmp[0] = '%';
-	tmp[1] = '\0';
-	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len), sizeof(char))))
+	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
 		return ;
-	else if (s->width > 0)
-		pad = ft_memset(pad, ' ', s->width - s->tmp_len - 1);
-	if (s->minus == 1)
-		s->str = ft_strjoin(tmp, pad);
-	else
-		s->str = ft_strjoin(pad, tmp);
+	tmp = '%';
+	s->tmp[0] = tmp;
+	s->str = ft_strjoin(s->str, s->tmp);
 	s->fmt += 1;
+
 	return ;
 }
 
