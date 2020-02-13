@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 15:14:47 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:22:10 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ int main(void)
 
 		a = -2;
 		b = 2;
-ft_printf(" --- Return : %d\n", ft_printf("%i, %d, %d, %d, %d, %s, %-c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j));
+ft_printf("%.2s%.7s", "hello", "world");
 	return (0);
 }

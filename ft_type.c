@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 14:55:31 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:13:10 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		ft_get_type(t_printf *s)
 {
+	if (s->fmt[0] == '%')
+		ft_pourcent(s);
 	if (s->fmt[0] == '.')
 		ft_get_precision(s);
 	if (s->fmt[0] == 'c')
@@ -30,8 +32,6 @@ void		ft_get_type(t_printf *s)
 		ft_x(s);
 	if (s->fmt[0] == 'X')
 		ft_x_up(s);
-	if (s->fmt[0] == '%')
-		ft_pourcent(s);
 	return ;
 }
 
@@ -59,11 +59,10 @@ void		ft_c(t_printf *s)
 	char *pad;
 	char tmp;
 
-	if (!(s->tmp = (char *)ft_calloc(1, sizeof(char))))
+	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
 		return ;
 	tmp = (char)va_arg(s->par, int);
 	s->tmp[0] = tmp;
-	s->tmp[1] = '\0';
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len), sizeof(char))))
 		return ;
 	if (s->zero == 1)

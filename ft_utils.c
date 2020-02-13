@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:14:36 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 16:07:51 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:27:04 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char		*ft_strjoin_endl(char *s1, const char *s2)
 
 	len1 = (s1 == NULL ? 0 : ft_strlen(s1));
 	len2 = (ft_int_strchr(s2, '%') == -1 ?
-	ft_strlen(s2) : ft_int_strchr(s2, '%'));
+	0 : ft_int_strchr(s2, '%'));
 	i = 0;
 	if (!(str = malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
