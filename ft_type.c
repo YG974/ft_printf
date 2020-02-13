@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 19:48:55 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:55:31 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,12 @@ void		ft_pourcent(t_printf *s)
 void		ft_c(t_printf *s)
 {
 	char *pad;
+	char tmp;
 
-	if (!(s->tmp = (char *)malloc(2 * sizeof(char))))
+	if (!(s->tmp = (char *)ft_calloc(1, sizeof(char))))
 		return ;
-	s->tmp[0] = (char)va_arg(s->par, int);
+	tmp = (char)va_arg(s->par, int);
+	s->tmp[0] = tmp;
 	s->tmp[1] = '\0';
 	if (!(pad = (char *)ft_calloc((s->width - s->tmp_len), sizeof(char))))
 		return ;
@@ -80,6 +82,8 @@ void		ft_c(t_printf *s)
 void		ft_s(t_printf *s)
 {
 	s->tmp = ((char*)va_arg(s->par, char *));
+	if (s->tmp == NULL)
+		s->tmp = ft_strjoin("(nul", "l)");
 	ft_sprecision(s);
 	ft_spadding(s);
 	s->fmt += 1;

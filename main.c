@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 14:15:52 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/10 20:34:41 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 15:14:47 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int main(void)
 
 		a = -2;
 		b = 2;
-ft_printf(" --- Return : %d\n", ft_printf("%*.*i, %*.*d, %*.*d, %*.*d, %*.*d, %*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
-ft_printf(" --- Return : %d\n", ft_printf("%-*.*i, %-*.*d, %-*.*d, %-*.*d, %-*.*d, %-*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
-ft_printf(" --- Return : %d\n", ft_printf("%0*.*i, %0*.*d, %0*.*d, %0*.*d, %0*.*d, %0*.*d", a, b, i, a, b, j, a, b, k, a, b, l, a, b, m, a, b, c));
+ft_printf(" --- Return : %d\n", ft_printf("%i, %d, %d, %d, %d, %s, %-c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j));
 	return (0);
 }
