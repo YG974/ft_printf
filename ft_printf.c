@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/11 14:50:33 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 19:06:39 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,3 @@ int			ft_printf(const char *format, ...)
 	ft_putstr_fd(s.str, 1);
 	return (ft_strlen(s.str));
 }
-
-
-
-
-

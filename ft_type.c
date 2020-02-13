@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 17:07:03 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 19:11:03 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void		ft_get_type(t_printf *s)
 }
 
 void		ft_pourcent(t_printf *s)
-{	char tmp;
+{
+	char	tmp;
 
 	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
 		return ;
@@ -44,13 +45,12 @@ void		ft_pourcent(t_printf *s)
 	s->tmp[0] = tmp;
 	s->str = ft_strjoin(s->str, s->tmp);
 	s->fmt += 1;
-
 	return ;
 }
 
 void		ft_c(t_printf *s)
 {
-	char tmp;
+	char	tmp;
 
 	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
 		return ;
