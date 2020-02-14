@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 20:31:03 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/14 09:37:53 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 void		ft_parsing(t_printf *s)
 {
 	ft_get_flags(s);
+	ft_get_precision(s);
+	ft_get_width(s);
+	ft_get_type(s);
+	return ;
 }
 
 void		ft_get_flags(t_printf *s)
@@ -79,6 +83,7 @@ void		ft_init_flags(t_printf *s)
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
+	//s->str = NULL;
 	s->sign = 0;
 	s->neg_width = 0;
 	s->neg_precision = 0;

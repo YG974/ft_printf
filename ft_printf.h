@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/12 17:02:36 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 22:24:22 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct	s_struct
 	char		*fmt;
 	char		*str;
 	char		*tmp;
+	int			michel;
 	int			tmp_len;
 	int			sign;
 	int			minus;
@@ -120,6 +121,7 @@ void	ft_g(t_printf *ptr);
 void	ft_precision(t_printf *ptr);
 void	ft_padding(t_printf *ptr);
 void	ft_padding_precision(t_printf *ptr);
+void	ft_padding_precision2(t_printf *ptr);
 void	ft_precision2(t_printf *ptr);
 void	ft_padding2(t_printf *ptr);
 void	ft_sprecision(t_printf *ptr);

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 19:11:03 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/13 22:37:14 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		ft_c(t_printf *s)
 	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
 		return ;
 	tmp = (char)va_arg(s->par, int);
+	write(1, &tmp, 1);
 	s->tmp[0] = tmp;
 	ft_sprecision(s);
 	ft_spadding(s);

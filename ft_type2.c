@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:27:45 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 19:11:34 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/14 09:32:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void		ft_d(t_printf *s)
 	}
 	else
 		s->tmp = ft_itoa_base(d, "0123456789");
+//	printf("\nstr:%s\n", s->str);
+//	printf("\ntmp:%s\n", s->tmp);
 	ft_padding2(s);
 	ft_precision2(s);
 	s->fmt += 1;
