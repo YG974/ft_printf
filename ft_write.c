@@ -3,14 +3,13 @@
 
 void		ft_order(t_printf *s)
 {
-	s->tmp_len = (s->precision > ft_strlen(s->tmp) ? 
-								s->precision : ft_strlen(s->tmp));
 //	if()
 	//{
-		ft_write_width(s);
-//		ft_write_sign(s);
+		s->tmp_len = ft_strlen(s->tmp);
 		ft_write_preci(s);
+//		ft_write_sign(s);
 		ft_write_arg(s);
+		ft_write_width(s);
 /*	}
 	else
 	{
@@ -49,7 +48,9 @@ void		ft_write_arg(t_printf *s)
 		}
 		else
 		{
-			ft_putstr_fd(s->tmp, 1);
+//			printf("\n");
+			printf("%s", s->tmp);
+//			ft_putstr_fd(s->tmp, 1);
 			s->michel += ft_strlen(s->tmp);
 		}
 		return;
@@ -58,12 +59,18 @@ void		ft_write_arg(t_printf *s)
 void		ft_write_width(t_printf *s)
 {
 	char	c;
+	int		i;
+	int		j;
 
 	c = ' ';
-	if (s->width > s->tmp_len)
+	j = (s->precision > s->tmp_len ? 
+			s->precision : s->tmp_len);
+	i = s->width;		
+	while (i > j)
 	{
-		write(1, &c, s->width - s->tmp_len);
-		s->michel += s->width - s->tmp_len;
+		write(1, &c, 1);
+		s->michel ++;
+		i--;
 	}
 	return ;
 }
@@ -71,15 +78,20 @@ void		ft_write_width(t_printf *s)
 void		ft_write_preci(t_printf *s)
 {
 	char	c;
+	int		i;
 
-	if ((s->zero == 1 || s->neg_width == 1))
+	s->precision = 
+	i = (s->precision > s->tmp_len ? 
+			s->precision : s->tmp_len);
+	if ((s->minus == 1 || s->neg_width == 1))
 		c = '0';
 	else
 		c = ' ';
-	if (s->precision > s->tmp_len)
+	while (i > s->tmp_len)
 	{
-		write(1, &c, s->precision - s->tmp_len);
-		s->michel += s->precision - s->tmp_len;
+		write(1, &c, 1);
+		s->michel++;
+		i--;
 	}
 	return ;
 }
