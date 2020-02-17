@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/17 12:33:34 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:36:34 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int			ft_printf(const char *format, ...)
 	s.fmt = (char *)format;
 	if (!(s.str = (char *)ft_calloc(1, sizeof(char*))))
 		return (-1);
-	s.michel = 0;	
+	s.michel = 0;
 	va_start(s.par, format);
 	while (s.fmt[0])
 	{
 		s.str = ft_strjoin_endl(s.str, s.fmt);
 		s.fmt += ft_int_strchr(s.fmt, '%') + 1;
 		ft_putstr_fd(s.str, 1);
-		s.michel += ft_strlen(s.str);
+		s.michel+= ft_strlen(s.str);
 		s.str[0] = '\0';
 		ft_parsing(&s);
 		if (ft_int_strchr(s.fmt, '%') == -1)
@@ -34,7 +34,7 @@ int			ft_printf(const char *format, ...)
 			s.str = ft_strjoin(s.str, s.fmt);
 			s.fmt += ft_int_strchr(s.fmt, '\0');
 			ft_putstr_fd(s.str, 1);
-			s.michel += ft_strlen(s.str);
+			s.michel+= ft_strlen(s.str);
 		}
 		s.str[0] = '\0';
 

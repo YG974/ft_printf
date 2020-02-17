@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/17 11:00:19 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:00:35 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,12 @@ typedef struct	s_struct
 	int			space;
 	int			sharp;
 	int			star;
-	int 		pstar;
-	int 		wstar;
 	int			width;
 	int			neg_width;
 	int			neg_precision;
 	int			dot;
-	int			pdot;
+	int			precision_on;
+	int			width_on;
 	int			precision;
 	va_list		par;
 }				t_printf;

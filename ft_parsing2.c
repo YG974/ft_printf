@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:20:09 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/14 09:43:22 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 16:59:33 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void		ft_get_width(t_printf *s)
 		{
 			width = (width * 10) + (s->fmt[0] - '0');
 			s->fmt++;
+			s->width_on = 1;
 		}
 		s->width = width;
 	}
@@ -59,7 +60,7 @@ void		ft_get_precision(t_printf *s)
 	{
 		while (s->fmt[0] >= '0' && s->fmt[0] <= '9')
 		{
-			s->pdot = 1;
+			s->precision_on = 1;
 			pres = (pres * 10) + (s->fmt[0] - '0');
 			s->fmt++;
 		}
@@ -79,7 +80,7 @@ void		ft_get_precision2(t_printf *s)
 		s->star = 1;
 		s->fmt++;
 		pres = (int)va_arg(s->par, int);
-		s->pdot = 1;
+		s->precision_on = 1;
 		if (pres < 0)
 		{
 			pres = 1;

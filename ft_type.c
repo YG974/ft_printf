@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/17 12:36:18 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:41:18 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		ft_c(t_printf *s)
 		s->width = 1;
 	tmp = (char)va_arg(s->par, int);
 	write(1, &tmp, 1);
+	s->michel++;
 	s->fmt += 1;
 	return ;
 }
