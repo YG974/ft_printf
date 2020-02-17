@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-
 void		ft_pad_1(t_printf *s)
 {
+		ft_write_width(s);
 		ft_write_sign(s);
 		ft_write_arg(s);
 	return ;
@@ -11,25 +11,26 @@ void		ft_pad_1(t_printf *s)
 
 void		ft_pad_2(t_printf *s)
 {
-		ft_write_width(s);
 		ft_write_sign(s);
 		ft_write_arg(s);
+		ft_write_width(s);
 	return ;
 }
 
 void		ft_pad_3(t_printf *s)
 {
 		ft_write_sign(s);
-		ft_write_arg(s);
 		ft_write_width(s);
+		ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_4(t_printf *s)
 {
 		ft_write_sign(s);
-		ft_write_arg(s);
+		ft_write_preci(s);
 		ft_write_width(s);
+		ft_write_arg(s);
 	return ;
 }
 
@@ -37,15 +38,17 @@ void		ft_pad_5(t_printf *s)
 {
 		ft_write_sign(s);
 		ft_write_arg(s);
+		ft_write_preci(s);
 		ft_write_width(s);
 	return ;
 }
 
 void		ft_pad_6(t_printf *s)
 {
-		ft_write_width(s);
 		ft_write_sign(s);
+		ft_write_preci(s);
 		ft_write_arg(s);
+		ft_write_width(s);
 	return ;
 }
 
@@ -58,20 +61,23 @@ void		ft_order(t_printf *s)
 		ft_pad_1(s);
 	else if (s->precision_on == 0 && s->width_on == 1 && s->zero == 1 &&
 			s->neg_width == 0)	
-		ft_pad_6(s);
+		ft_pad_3(s);
 	else if (s->precision_on == 0 && s->neg_width == 1 && s->zero == 1)	
-		ft_pad_5(s);
-	else if (s->neg_width == 0 && s->minus == 1)
-		ft_pad_5(s);
+		ft_pad_2(s);
+	else if (s->precision_on == 0 && s->neg_width == 0 && s->minus == 1)
+		ft_pad_2(s);
 	else if (s->precision_on == 0 && s->width_on == 1 && s->neg_width == 0
 		&& s->zero == 0)
+		ft_pad_1(s);
+	else if (s->neg_width == 1 && s->zero == 0 && s->precision_on == 0)
 		ft_pad_2(s);
-	else if (s->neg_width == 1 && s->zero == 0)
-		ft_pad_3(s);
-	else if (s->neg_width == 1 && s->zero == 1)
-		ft_pad_4(s);
+	else if (s->neg_width == 1 && s->zero == 1 && s->precision_on == 0)
+		ft_pad_2(s);
+	else if (s->neg_width == 1 && s->precision_on == 1 && s->neg_precision == 0)
+		ft_pad_6(s);
+	else if (s->neg_width == 1 && s->precision_on == 1 && s->neg_precision == 1)
+		ft_pad_5(s);
 	else
-		//((s->neg_width == 1) || (s->zero == 1 && s->tmp_len < s->precision))
 	{
 		ft_write_sign(s);
 		ft_write_preci(s);
@@ -143,10 +149,10 @@ void		ft_write_preci(t_printf *s)
 
 	i = (s->precision > s->tmp_len ? 
 			s->precision : s->tmp_len);
-	if ((s->minus == 1 || s->neg_width == 1 || s->zero == 1))
-		c = '0';
-	else
-		c = ' ';
+	//if ((s->minus == 1 || s->neg_width == 1 || s->zero == 1))
+	c = '0';
+//	else
+//		c = ' ';
 	while (i > s->tmp_len)
 	{
 		write(1, &c, 1);
