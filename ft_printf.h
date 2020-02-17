@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/17 17:00:35 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 20:42:21 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	ft_cprecision(t_printf *ptr);
 void	ft_cpadding(t_printf *ptr);
 void	ft_pourcent(t_printf *ptr);
 void	ft_order(t_printf *ptr);
+void	ft_order2(t_printf *ptr);
 void	ft_write_arg(t_printf *ptr);
 void	ft_write_preci(t_printf *ptr);
 void	ft_write_width(t_printf *ptr);
