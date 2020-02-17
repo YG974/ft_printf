@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:14:36 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 16:27:04 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/14 11:32:50 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char		*ft_strjoin_n(char *s1, char *s2, int n)
 	return (str);
 }
 
-char		*ft_strjoin_endl(char *s1, const char *s2)
+char		*ft_strjoin_endl(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;

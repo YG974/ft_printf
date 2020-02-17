@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 22:24:22 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 11:00:19 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct	s_struct
 	int			michel;
 	int			tmp_len;
 	int			sign;
+	int			null;
 	int			minus;
 	int			positive;
 	int			zero;
@@ -103,8 +104,10 @@ void	ft_star(t_printf *s);
 void	ft_preci_star(t_printf *s);
 int		ft_int_strchr(const char *s, int c);
 char	*ft_itoa_base(long	nbr, char *base);
-char	*ft_strjoin_endl(char *s1, const char *s2);
+char	*ft_strjoin_endl(char *s1, char *s2);
 char	*ft_strjoin_n(char *s1, char *s2, int n);
+char	*ft_strjoin2_n(char *s1, char *s2, int n);
+char	*ft_strjoin2(char *s1, char *s2);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
 void	ft_p(t_printf *ptr);
@@ -126,6 +129,13 @@ void	ft_precision2(t_printf *ptr);
 void	ft_padding2(t_printf *ptr);
 void	ft_sprecision(t_printf *ptr);
 void	ft_spadding(t_printf *ptr);
+void	ft_cprecision(t_printf *ptr);
+void	ft_cpadding(t_printf *ptr);
 void	ft_pourcent(t_printf *ptr);
+void	ft_order(t_printf *ptr);
+void	ft_write_arg(t_printf *ptr);
+void	ft_write_preci(t_printf *ptr);
+void	ft_write_width(t_printf *ptr);
+void	ft_write_sign(t_printf *ptr);
 
 #endif

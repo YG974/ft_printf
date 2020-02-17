@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:21:46 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/14 09:41:53 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/14 13:52:28 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		ft_padding_precision(t_printf *s)
 	int		l;
 
 	l = 0;
+	pad = NULL;
 	if (s->dot == 0 && s->precision == 0)
 	{
 		s->precision = -1;
@@ -29,7 +30,8 @@ void		ft_padding_precision(t_printf *s)
 		if (!(pad = (char *)ft_calloc((s->precision - l + 1), sizeof(char))))
 			return ;
 		pad = ft_memset(pad, '0', s->precision - l);
-		s->tmp = ft_strjoin(pad, s->tmp);
+		s->tmp = ft_strjoin2(pad, s->tmp);
+		free(pad);
 	}
 	ft_padding_precision2(s);
 	return ;
@@ -40,6 +42,7 @@ void		ft_padding_precision2(t_printf *s)
 	char	*pad;
 	int		l;
 
+	pad = NULL;
 	if ((s->zero == 1 && s->width > 0 && s->precision != 0) &&
 	((s->neg_width == 0 && s->dot == 1) && (s->neg_precision == 1)))
 	{
@@ -48,7 +51,8 @@ void		ft_padding_precision2(t_printf *s)
 		if (!(pad = (char *)ft_calloc((s->width - l + 1), sizeof(char))))
 			return ;
 		pad = ft_memset(pad, '0', s->width - l);
-		s->tmp = ft_strjoin(pad, s->tmp);
+		s->tmp = ft_strjoin2(pad, s->tmp);
+		free(pad);
 	}
 	if ((s->zero == 1 && s->width > 0 && s->dot == 0 && s->neg_width == 0
 		&& s->minus == 0))
@@ -58,7 +62,8 @@ void		ft_padding_precision2(t_printf *s)
 		if (!(pad = (char *)ft_calloc((s->width - l + 1), sizeof(char))))
 			return ;
 		pad = ft_memset(pad, '0', s->width - l);
-		s->tmp = ft_strjoin(pad, s->tmp);
+		s->tmp = ft_strjoin2(pad, s->tmp);
+		free(pad);
 	}
 	return ;
 }
@@ -69,6 +74,7 @@ void		ft_padding2(t_printf *s)
 	int		l;
 
 	l = ft_strlen(s->tmp) + s->sign;
+	pad = NULL;
 	if (s->precision > l - s->sign || s->neg_width == 1 || s->zero == 1)
 		ft_padding_precision(s);
 	s->tmp_len = (ft_strlen(s->tmp) + s->sign > s->width ?
@@ -84,7 +90,7 @@ void		ft_padding2(t_printf *s)
 	{
 		if (s->sign == 1)
 		{
-			s->tmp = ft_strjoin("-", s->tmp);
+			s->tmp = ft_strjoin2("-", s->tmp);
 			s->sign = 0;
 		}
 		pad = ft_memset(pad, ' ', s->width - s->tmp_len - s->sign);
@@ -92,9 +98,10 @@ void		ft_padding2(t_printf *s)
 	if ((s->minus == 1 || s->neg_width == 1))
 		s->tmp = ft_strjoin(s->tmp, pad);
 	else
-		s->tmp = ft_strjoin(pad, s->tmp);
+		s->tmp = ft_strjoin2(pad, s->tmp);
+	free(pad);
 	if (s->sign == 1)
-		s->tmp = ft_strjoin("-", s->tmp);
+		s->tmp = ft_strjoin2("-", s->tmp);
 	s->str = ft_strjoin(s->str, s->tmp);
 	return ;
 }
@@ -103,6 +110,7 @@ void		ft_precision2(t_printf *s)
 {
 	char *pad;
 
+	pad = NULL;
 	if (!(pad = (char *)ft_calloc(1, sizeof(char))))
 		return ;
 	if (s->precision < 0)

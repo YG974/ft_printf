@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/13 22:37:14 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 12:36:18 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void		ft_get_type(t_printf *s)
 	if (s->fmt[0] == '.')
 		ft_get_precision(s);
 	if (s->fmt[0] == 'c')
+	{
 		ft_c(s);
+	}
 	if (s->fmt[0] == 's')
 		ft_s(s);
 	if (s->fmt[0] == 'p')
@@ -52,13 +54,10 @@ void		ft_c(t_printf *s)
 {
 	char	tmp;
 
-	if (!(s->tmp = (char *)ft_calloc(2, sizeof(char))))
-		return ;
+	if (s->width == 0)
+		s->width = 1;
 	tmp = (char)va_arg(s->par, int);
 	write(1, &tmp, 1);
-	s->tmp[0] = tmp;
-	ft_sprecision(s);
-	ft_spadding(s);
 	s->fmt += 1;
 	return ;
 }
@@ -68,8 +67,7 @@ void		ft_s(t_printf *s)
 	s->tmp = ((char*)va_arg(s->par, char *));
 	if (s->tmp == NULL)
 		s->tmp = ft_strjoin("(nul", "l)");
-	ft_sprecision(s);
-	ft_spadding(s);
+	ft_write_arg(s);
 	s->fmt += 1;
 	return ;
 }

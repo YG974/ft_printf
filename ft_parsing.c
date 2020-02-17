@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/14 09:37:53 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 12:07:55 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		ft_init_flags(t_printf *s)
 	s->minus = 0;
 	s->positive = 0;
 	s->zero = 0;
+	s->null = 0;
 	s->space = 0;
 	s->sharp = 0;
 	s->star = 0;
@@ -83,7 +84,6 @@ void		ft_init_flags(t_printf *s)
 	s->width = 0;
 	s->precision = 0;
 	s->dot = 0;
-	//s->str = NULL;
 	s->sign = 0;
 	s->neg_width = 0;
 	s->neg_precision = 0;
