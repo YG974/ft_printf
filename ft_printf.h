@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 18:02:13 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 21:36:58 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ char	*ft_strjoin2(char *s1, char *s2);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
 void	ft_s2(t_printf *ptr);
+void	ft_s3(t_printf *ptr);
 void	ft_p(t_printf *ptr);
 void	ft_d(t_printf *ptr);
 void	ft_i(t_printf *ptr);
@@ -140,8 +141,10 @@ void	ft_write_arg(t_printf *ptr);
 void	ft_write_preci(t_printf *ptr);
 void	ft_write_width(t_printf *ptr);
 void	ft_write_width_zero(t_printf *ptr);
+void	ft_write_width_zero2(t_printf *ptr);
 void	ft_write_sign(t_printf *ptr);
 void	ft_write_width_str(t_printf *ptr);
+void	ft_write_preci_str(t_printf *ptr);
 void	ft_write_str(t_printf *ptr);
 void	ft_write_str2(t_printf *ptr);
 
