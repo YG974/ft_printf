@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 11:06:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 12:29:01 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 13:47:38 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,14 @@ void		ft_order(t_printf *s)
 */
 	else if (s->width_on == 1 && s->precision_on == 0) 
 	{
-		if (s->zero == 1)
-			ft_pad_3(s);
+		if (s->zero == 1 && s->neg_width == 0)
+			ft_pad_2(s);
+		else if (s->neg_width == 1 && s->minus == 0)
+			ft_pad_2(s);
 		else if (s->minus == 1)
 			ft_pad_2(s);
-		else if (s->neg_width == 1)
-			ft_pad_2(s);
+		else if (s->zero == 1 && s->neg_width == 1)
+			ft_pad_9(s);
 		else 
 			ft_pad_1(s);
 	}
@@ -145,7 +147,6 @@ void		ft_order2(t_printf *s)
 	}
 	else 
 		ft_order3(s);
-	free(s->tmp);
 	return ;
 }
 
@@ -158,16 +159,27 @@ void		ft_order3(t_printf *s)
 	{
 		if (s->neg_width == 0 && s->neg_precision == 0)
 		{
-			if (s->zero == 1)
-				ft_pad_9(s);
-			else if (s->minus == 1)
+			if (s->minus == 1)
 				ft_pad_6(s);
 			else 
 				ft_pad_9(s);
 		}
-		else if (s->neg_precision == 1 && s->zero == 1)
-			ft_pad_2(s);
-		else if (s->neg_precision == 1 && s->minus == 1)
+		else
+			ft_order4(s);
+	}
+	else
+		ft_order4(s);
+	return ;
+}
+
+void		ft_order4(t_printf *s)
+{
+/*
+**		Width = OUI ET Precision = OUI 
+*/
+	if (s->precision_on == s->width_on == 1)
+	{
+		if (s->neg_precision == 1 && (s->zero == 1 || s->minus == 1))
 			ft_pad_2(s);
 		else if (s->neg_width == 0 && s->precision == 0)
 			ft_pad_1(s);
@@ -180,8 +192,11 @@ void		ft_order3(t_printf *s)
 	}
 	else
 		ft_pad_9(s);
+	free(s->tmp);
 	return ;
 }
+
+
 
 
 void		ft_write_sign(t_printf *s)
