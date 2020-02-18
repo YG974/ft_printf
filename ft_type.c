@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 22:41:28 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 22:44:39 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ void		ft_s3(t_printf *s)
 	}
 	else if (s->neg_width == 1)
 	{
-		ft_write_width_str(s);
 		ft_write_preci_str(s);
+		ft_write_width_str(s);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 22:29:17 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 22:43:06 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ void		ft_write_width_zero(t_printf *s)
 	int		i;
 	int		j;
 
-	if (s->zero == 1)
+	if (s->zero == 1 || s->minus)
 	{
 		if (s->precision_on == 0 && s->neg_width == 0)
 			c = '0';
