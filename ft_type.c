@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 22:44:39 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 23:29:51 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,17 @@ void		ft_s2(t_printf *s)
 		ft_write_arg(s);
 	else if (s->precision_on == 1 && s->width_on == 1)
 	{
-		if (s->neg_precision == 1)
+		if (s->neg_precision == 1 && s->neg_width == 0 && s->minus == 0)
 		{
-			ft_write_arg(s);
 			ft_write_width_str(s);
+			ft_write_arg(s);
 		}
-		else if (s->minus == 1 && s->neg_width == 0)
+		else if (s->minus == 1 && s->neg_width == 0 && s->neg_precision == 0)
 		{
 			ft_write_preci_str(s);
 			ft_write_width_str(s);
 		}
-		else if (s->minus == 1 && s->neg_width == 1)
+		else if (s->minus == 1 && s->neg_width == 1 && s->neg_precision == 0)
 		{
 			ft_write_preci_str(s);
 			ft_write_width_str(s);
@@ -131,9 +131,34 @@ void		ft_s3(t_printf *s)
 		write(1, " ", 1);
 		s->michel ++;
 	}
-	else if (s->neg_width == 1)
+	else if (s->neg_width == 0 && s->neg_precision == 1 && s->minus == 1)
+	{
+		ft_write_arg(s);
+		ft_write_width_str(s);
+	}
+	else if (s->minus == 0 && s->neg_precision == 1 && s->neg_width == 0 )
+	{
+		ft_write_arg(s);
+		ft_write_width_str(s);
+	}
+	else if (s->neg_width == 1 && s->neg_precision == 0 && s->minus == 0)
 	{
 		ft_write_preci_str(s);
+		ft_write_width_str(s);
+	}
+	else if (s->neg_width == 1 && s->neg_precision == 1 && s->minus == 0)
+	{
+		ft_write_arg(s);
+		ft_write_width_str(s);
+	}
+	else if (s->neg_width == 1 && s->neg_precision == 1 && s->minus == 1)
+	{
+		ft_write_arg(s);
+		ft_write_width_str(s);
+	}
+	else if (s->neg_width == 0 && s->neg_precision == 1 && s->minus == 1)
+	{
+		ft_write_arg(s);
 		ft_write_width_str(s);
 	}
 	else
