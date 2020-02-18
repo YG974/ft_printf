@@ -6,21 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 21:21:16 by ygeslin          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include <stdio.h>
-#include "ft_printf.h"
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_write.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/18 11:06:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 13:47:38 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 22:29:17 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,90 +21,84 @@ void		ft_pad_0(t_printf *s)
 
 void		ft_pad_1(t_printf *s)
 {
-		ft_write_width(s);
-		ft_write_sign(s);
-		ft_write_arg(s);
+	ft_write_width(s);
+	ft_write_sign(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_2(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_arg(s);
-		ft_write_width(s);
+	ft_write_sign(s);
+	ft_write_arg(s);
+	ft_write_width(s);
 	return ;
 }
 
 void		ft_pad_3(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_width(s);
-		ft_write_arg(s);
+	ft_write_sign(s);
+	ft_write_width(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_4(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_preci(s);
-		ft_write_width(s);
-		ft_write_arg(s);
+	ft_write_sign(s);
+	ft_write_preci(s);
+	ft_write_width(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_5(t_printf *s)
 {
-		ft_write_preci(s);
-		ft_write_sign(s);
-		ft_write_arg(s);
-		ft_write_width(s);
+	ft_write_preci(s);
+	ft_write_sign(s);
+	ft_write_arg(s);
+	ft_write_width(s);
 	return ;
 }
 
 void		ft_pad_6(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_preci(s);
-		ft_write_arg(s);
-		ft_write_width(s);
+	ft_write_sign(s);
+	ft_write_preci(s);
+	ft_write_arg(s);
+	ft_write_width(s);
 	return ;
 }
 
 void		ft_pad_7(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_preci(s);
-		ft_write_arg(s);
+	ft_write_sign(s);
+	ft_write_preci(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_8(t_printf *s)
 {
-		ft_write_sign(s);
-		ft_write_arg(s);
+	ft_write_sign(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_pad_9(t_printf *s)
 {
-		ft_write_width(s);
-		ft_write_sign(s);
-		ft_write_preci(s);
-		ft_write_arg(s);
+	ft_write_width(s);
+	ft_write_sign(s);
+	ft_write_preci(s);
+	ft_write_arg(s);
 	return ;
 }
 
 void		ft_order(t_printf *s)
 {
 	s->tmp_len = ft_strlen(s->tmp);
-/*
-**		Width = NON ET Precision = NON
-*/
 	if (s->precision_on == 0 && s->width_on == 0)
 		ft_pad_1(s);
-/*
-**		Width = OUI ET precision = NON
-*/
 	else if (s->width_on == 1 && s->precision_on == 0)
 	{
 		if (s->zero == 1 && s->neg_width == 0)
@@ -139,9 +119,6 @@ void		ft_order(t_printf *s)
 
 void		ft_order2(t_printf *s)
 {
-/*
-**		Width = NON ET Precision = OUI
-*/
 	if (s->precision_on == 1 && s->width_on == 0)
 	{
 		if (s->precision <= 0 && s->null == 1)
@@ -166,9 +143,6 @@ void		ft_order2(t_printf *s)
 
 void		ft_order3(t_printf *s)
 {
-/*
-**		Width = OUI ET Precision = OUI
-*/
 	if (s->precision_on == s->width_on == 1)
 	{
 		if (s->neg_width == 0 && s->neg_precision == 0)
@@ -188,9 +162,6 @@ void		ft_order3(t_printf *s)
 
 void		ft_order4(t_printf *s)
 {
-/*
-**		Width = OUI ET Precision = OUI
-*/
 	if (s->precision_on == s->width_on == 1)
 	{
 		if (s->neg_precision == 1 && (s->zero == 1 || s->minus == 1))
@@ -210,9 +181,6 @@ void		ft_order4(t_printf *s)
 	return ;
 }
 
-
-
-
 void		ft_write_sign(t_printf *s)
 {
 	if (s->sign == 1)
@@ -230,20 +198,20 @@ void		ft_write_sign(t_printf *s)
 
 void		ft_write_arg(t_printf *s)
 {
-		char c;
+	char c;
 
-		c = 0;
-		if (s->null == 1)
-		{
-			write(1, &c, 1);
-			s->michel++;
-		}
-		else
-		{
-			ft_putstr_fd(s->tmp, 1);
-			s->michel += ft_strlen(s->tmp);
-		}
-		return;
+	c = 0;
+	if (s->null == 1)
+	{
+		write(1, &c, 1);
+		s->michel++;
+	}
+	else
+	{
+		ft_putstr_fd(s->tmp, 1);
+		s->michel += ft_strlen(s->tmp);
+	}
+	return ;
 }
 
 void		ft_write_width(t_printf *s)
@@ -252,21 +220,20 @@ void		ft_write_width(t_printf *s)
 	int		i;
 	int		j;
 
-	if ( s->zero == 1)
+	if (s->zero == 1)
 		ft_write_width_zero(s);
 	else
 		c = ' ';
-
 	if (s->precision != s->tmp_len + s->sign)
 		j = (s->precision > s->tmp_len + s->sign ?
-			s->precision + s->sign : s->tmp_len + s->sign);
+		s->precision + s->sign : s->tmp_len + s->sign);
 	else
 		j = s->precision + s->sign;
-	i =  s->width;
+	i = s->width;
 	while (i > j)
 	{
 		write(1, &c, 1);
-		s->michel ++;
+		s->michel++;
 		i--;
 	}
 	return ;
@@ -280,9 +247,9 @@ void		ft_write_width_zero(t_printf *s)
 
 	if (s->zero == 1)
 	{
-		if ( s->precision_on == 0 && s->neg_width == 0)
+		if (s->precision_on == 0 && s->neg_width == 0)
 			c = '0';
-		else if(s->neg_width == 0 && s->precision == 0)
+		else if (s->neg_width == 0 && s->precision == 0)
 			c = ' ';
 		else if (s->neg_width == s->precision == 0 && s->width_on == 1)
 			c = ' ';
@@ -299,10 +266,9 @@ void		ft_write_width_zero(t_printf *s)
 	while (i > j)
 	{
 		write(1, &c, 1);
-		s->michel ++;
+		s->michel++;
 		i--;
 	}
-
 	return ;
 }
 
@@ -341,7 +307,7 @@ void		ft_write_str(t_printf *s)
 			i++;
 		}
 	}
-	return;
+	return ;
 }
 
 void		ft_write_width_str(t_printf *s)
@@ -351,10 +317,12 @@ void		ft_write_width_str(t_printf *s)
 	i = 0;
 	if (s->width > s->tmp_len)
 	{
+		if (s->tmp_len == 1 && s->precision == 0 && s->precision_on == 1)
+			i--;
 		while (i < s->width - s->tmp_len)
 		{
 			write(1, " ", 1);
-			s->michel ++;
+			s->michel++;
 			i++;
 		}
 	}
@@ -364,7 +332,7 @@ void		ft_write_width_str(t_printf *s)
 		while (i < s->width - s->precision)
 		{
 			write(1, " ", 1);
-			s->michel ++;
+			s->michel++;
 			i++;
 		}
 	}
@@ -387,6 +355,5 @@ void		ft_write_preci_str(t_printf *s)
 	}
 	else if (s->precision >= s->tmp_len)
 		ft_write_arg(s);
-	return;
+	return ;
 }
-
