@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 19:52:19 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 21:21:16 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -352,6 +352,16 @@ void		ft_write_width_str(t_printf *s)
 	if (s->width > s->tmp_len)
 	{
 		while (i < s->width - s->tmp_len)
+		{
+			write(1, " ", 1);
+			s->michel ++;
+			i++;
+		}
+	}
+	else if (s->width > s->precision && s->precision_on == 1
+		&& s->neg_precision == 0)
+	{
+		while (i < s->width - s->precision)
 		{
 			write(1, " ", 1);
 			s->michel ++;
