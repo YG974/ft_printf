@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/17 14:41:18 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/17 23:16:08 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ void		ft_s(t_printf *s)
 	s->tmp = ((char*)va_arg(s->par, char *));
 	if (s->tmp == NULL)
 		s->tmp = ft_strjoin("(nul", "l)");
-	ft_write_arg(s);
+	if (s->precision_on == 1)
+		ft_write_str(s);
+	else
+		ft_write_arg(s);
 	s->fmt += 1;
 	return ;
 }
