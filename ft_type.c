@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 19:05:11 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/18 19:31:21 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void		ft_s(t_printf *s)
 	s->tmp = ((char*)va_arg(s->par, char *));
 	if (s->tmp == NULL)
 		s->tmp = ft_strjoin("(nul", "l)");
-	s->tmp_len = (s->precision > s->tmp_len ? s->precision : s->tmp_len);
+	s->tmp_len = ft_strlen(s->tmp);
 	if (s->precision_on == 0 && s->width_on == 0)
 		ft_write_arg(s);
-	else if (s->width_on == 1 && s->precision == 0)
+	else if (s->width_on == 1 && s->precision_on == 0)
 	{
-		if (s->zero == 1 || s->minus == 1)
+		if (s->zero == 1 || s->minus == 1 || s->neg_width == 1)
 		{
 			ft_write_arg(s);
 			ft_write_width_str(s);
@@ -84,6 +84,14 @@ void		ft_s(t_printf *s)
 			ft_write_arg(s);
 		}
 	}
+	else
+		ft_s2(s);
 	s->fmt += 1;
+	return ;
+}
+
+void		ft_s2(t_printf *s)
+{
+	s->tmp_len = s->tmp_len;
 	return ;
 }
