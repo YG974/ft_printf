@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/19 19:00:43 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/19 20:51:05 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,19 +85,6 @@ void		ft_pad_8(t_printf *s)
 	return ;
 }
 
-void		ft_pad_9(t_printf *s)
-{
-	/*
-	ft_write_width(s);
-	ft_write_sign(s);
-	ft_write_preci(s);
-	ft_write_arg(s);
-	*/
-	if(s->tmp)
-		write(1, "A", 1);
-	return ;
-}
-
 void		ft_pad_10(t_printf *s)
 {
 	write(1, " ", 1);
@@ -122,6 +109,16 @@ void		ft_pad_12(t_printf *s)
 	return ;
 }
 
+void		ft_pad_13(t_printf *s)
+{
+	ft_write_sign(s);
+	if (s->tmp_len == 1 && s->tmp[0] == '0')
+		ft_pad_10(s);
+	else
+		ft_write_arg(s);
+	ft_write_width(s);
+	return ;
+}
 
 void		ft_order(t_printf *s)
 {
@@ -134,44 +131,41 @@ void		ft_order(t_printf *s)
 		ft_pad_8(s);
 	else if (s->dot == 1 && s->precision_on == 0 && s->width_on == 1)
 		ft_pad_1(s);
-	else if (s->width_on == 1 && s->precision_on == 0 
+	else if (s->width_on == 1 && s->precision_on == 0
 		&& s->minus == 0 && s->zero == 0)
 	{
-		 if (s->neg_width == 1)
+		if (s->neg_width == 1)
 			ft_pad_2(s);
 		else
 			ft_pad_1(s);
 	}
-	else
+	else if (s->minus == 0 && s->zero == 0)
 		ft_order2(s);
+	else
+		ft_order3(s);
 	return ;
 }
 
 void		ft_order2(t_printf *s)
 {
-	if(s->minus == 0 && s->zero == 0)
+	if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 1)
+		ft_pad_8(s);
+	else if (s->precision_on == 1 && s->width_on == 1)
 	{
-		if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 1)
-			ft_pad_8(s);
-		else if (s->precision_on == 1 && s->width_on == 1)
-		{
-			if (s->precision == 0 && s->tmp[0] != '0' && s->neg_width == 0)
-				ft_pad_11(s);
-			else if (s->precision == 0 != s->neg_width && s->tmp[0] != '0')
-				ft_pad_2(s);
-			else if (s->precision == 0 && s->tmp[0] == '0')
-				ft_pad_9(s);
-			else if (s->neg_precision == 1 && s->neg_width == 0)
-				ft_pad_11(s);
-			else if (s->neg_precision == 1 && s->neg_width == 1)
-				ft_pad_2(s);
-			else if (s->neg_precision == 0 && s->neg_width == 0)
-				ft_pad_11(s);
-			else
-				ft_pad_5(s);
-		}
+		if (s->precision == 0 && s->tmp[0] != '0' && s->neg_width == 0)
+			ft_pad_11(s);
+		else if (s->precision == 0 != s->neg_width && s->tmp[0] != '0')
+			ft_pad_2(s);
+		else if (s->precision == 0 && s->tmp[0] == '0')
+			ft_pad_1(s);
+		else if (s->neg_precision == 1 && s->neg_width == 0)
+			ft_pad_11(s);
+		else if (s->neg_precision == 1 && s->neg_width == 1)
+			ft_pad_2(s);
+		else if (s->neg_precision == 0 && s->neg_width == 0)
+			ft_pad_11(s);
 		else
-			ft_order3(s);
+			ft_pad_5(s);
 	}
 	else
 		ft_order3(s);
@@ -185,12 +179,18 @@ void		ft_order3(t_printf *s)
 		if (s->precision_on == 1 && s->width_on == 0)
 		{
 			if (s->precision == 0)
-				ft_pad_8(s);
+				ft_pad_1(s);
 			else
 				ft_pad_7(s);
 		}
 	}
-	else if (s->zero == 1 && s->minus == 0)
+	else
+		ft_order4(s);
+}
+
+void		ft_order4(t_printf *s)
+{
+	if (s->zero == 1 && s->minus == 0)
 	{
 		if (s->precision_on == 1 && s->width_on == 0)
 			ft_pad_7(s);
@@ -201,30 +201,51 @@ void		ft_order3(t_printf *s)
 			else
 				ft_pad_2(s);
 		}
+		else if (s->neg_precision == 0)
+		{
+			if (s->neg_width == 0)
+				ft_pad_11(s);
+			else
+				ft_pad_6(s);
+		}
+		else if (s->neg_precision == 1)
+		{
+			if (s->neg_width == 1)
+				ft_pad_2(s);
+			else
+				ft_pad_12(s);
+		}
 	}
-	else if (s->minus == 1)
+	else
+		ft_order5(s);
+	return ;
+}
+
+void		ft_order5(t_printf *s)
+{
+	if (s->minus == 1)
 	{
 		if (s->precision_on == 1 && s->width_on == 0)
 			ft_pad_7(s);
 		else if (s->precision_on == 0 && s->width_on == 1)
+			ft_pad_2(s);
+		else if (s->neg_precision == 0)
 		{
-			if (s->neg_width == 0)
+			if (s->precision == 0 && s->neg_width == 0)
+				ft_pad_13(s);
+			else
+				ft_pad_6(s);
+		}
+		else if (s->neg_precision == 1)
+		{
+			if (s->neg_width == 1)
 				ft_pad_2(s);
 			else
-				ft_pad_2(s);
+				ft_pad_5(s);
 		}
 	}
-//	else
-//	else
-//		ft_order4(s);
 	return ;
 }
-
-/*
-void		ft_order4(t_printf *s)
-{
-}
-*/
 
 void		ft_write_sign(t_printf *s)
 {
@@ -261,8 +282,8 @@ void		ft_write_arg(t_printf *s)
 
 void		ft_write_width(t_printf *s)
 {
-	int	i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	c = ' ';
@@ -270,7 +291,7 @@ void		ft_write_width(t_printf *s)
 	if (s->precision > s->tmp_len)
 		s->tmp_len = s->precision;
 	if (s->tmp_len == 1 && s->precision == 0 && s->precision_on == 1)
-			s->tmp_len = s->tmp_len - s->sign;
+		s->tmp_len = s->tmp_len - s->sign;
 	while (i < s->width - s->tmp_len)
 	{
 		write(1, &c, 1);
@@ -282,8 +303,8 @@ void		ft_write_width(t_printf *s)
 
 void		ft_write_width_zero(t_printf *s)
 {
-	int	i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	c = '0';
@@ -396,8 +417,6 @@ void		ft_write_width_str3(t_printf *s)
 	return ;
 }
 
-
-
 void		ft_write_preci_str(t_printf *s)
 {
 	int		i;
@@ -430,6 +449,7 @@ void		ft_print_s2(t_printf *s)
 	ft_write_preci_str(s);
 	return ;
 }
+
 void		ft_print_s3(t_printf *s)
 {
 	ft_write_preci_str(s);
