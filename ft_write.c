@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/19 20:51:05 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/19 21:10:20 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ void		ft_order4(t_printf *s)
 		}
 		else if (s->neg_precision == 0)
 		{
-			if (s->neg_width == 0)
+			if (s->neg_width == 0 && s->width > s->precision)
 				ft_pad_11(s);
 			else
 				ft_pad_6(s);
@@ -287,11 +287,13 @@ void		ft_write_width(t_printf *s)
 
 	i = 0;
 	c = ' ';
-	s->tmp_len = s->tmp_len + s->sign;
+	s->tmp_len = ft_strlen(s->tmp);
 	if (s->precision > s->tmp_len)
-		s->tmp_len = s->precision;
+		s->tmp_len = s->precision + s->sign;
+	else
+		s->tmp_len += s->sign;
 	if (s->tmp_len == 1 && s->precision == 0 && s->precision_on == 1)
-		s->tmp_len = s->tmp_len - s->sign;
+		s->tmp_len = s->tmp_len;
 	while (i < s->width - s->tmp_len)
 	{
 		write(1, &c, 1);
