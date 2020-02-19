@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/19 14:37:10 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:03:51 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,114 +74,43 @@ void		ft_s(t_printf *s)
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 0)
 	{
 		if (s->dot == 1 && s->precision_on == 0)
-		{
-			write(1, " ", 1);
-			s->michel ++;
-		}
+			ft_print_s6(s);
 		else if (s->neg_width == 1)
-		{
-			ft_write_arg(s);
-			ft_write_width_str(s);
-		}
+			ft_print_s4(s);
 		else
-		{
-			ft_write_width_str(s);
-			ft_write_arg(s);
-		}
+			ft_print_s5(s);
 	}
 	else
 		ft_s2(s);
 	s->fmt += 1;
 	return ;
 }
+
 void		ft_s2(t_printf *s)
 {
 	if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 0)
 		ft_write_preci_str(s);
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 1)
-	{
-			ft_write_arg(s);
-			ft_write_width_str(s);
-	}
+		ft_print_s4(s);
 	else if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 1)
 		ft_write_arg(s);
 	else if (s->precision_on == 1 && s->width_on == 1)
 	{
 		if (s->minus == 0)
 		{
-			if (s->precision == 0) 
+			if (s->precision == 0)
 				ft_write_width_str3(s);
 			else if (s->neg_precision == 1 && s->neg_width == 0)
-			{
-				ft_write_width_str(s);
-				ft_write_arg(s);
-			}
+				ft_print_s(s);
 			else if (s->neg_precision == 1 && s->neg_width == 1)
-			{
-				ft_write_arg(s);
-				ft_write_width_str(s);
-			}
+				ft_print_s4(s);
 			else if (s->neg_precision == 0 && s->neg_width == 0)
-			{
-				ft_write_width_str2(s);
-				ft_write_preci_str(s);
-			}
+				ft_print_s2(s);
 			else
-			{
-				ft_write_preci_str(s);
-				ft_write_width_str(s);
-			}
+				ft_print_s3(s);
 		}
 		else
 			ft_s3(s);
-	}
-	return ;
-}
-
-void		ft_s3(t_printf *s)
-{
-	if (s->dot == 1 && s->precision_on == 0)
-	{
-		write(1, " ", 1);
-		s->michel ++;
-	}
-	if (s->minus == 1)
-	{
-		if (s->precision == 0) 
-			ft_write_width_str3(s);
-		else if (s->neg_width == 1 && s->neg_precision == 0) 
-		{
-			ft_write_preci_str(s);
-			ft_write_width_str(s);
-		}
-		else if (s->neg_width == 0 && s->neg_precision == 0
-				&& s->width <= s->precision)
-		{
-			ft_write_preci_str(s);
-			ft_write_width_str(s);
-		}
-		else if (s->neg_width == 1 && s->neg_precision == 1)
-		{
-			ft_write_arg(s);
-			ft_write_width_str(s);
-		}
-		else if (s->neg_width == 0 && s->neg_precision == 1)
-		{
-			ft_write_arg(s);
-			ft_write_width_str(s);
-		}
-		else if (s->neg_width == 0 && s->neg_precision == 0 && 
-				s->width > s->precision)
-		{
-			ft_write_preci_str(s);
-			ft_write_width_str2(s);
-		}
-		else
-		{
-			ft_write_width_str(s);
-		//	write(1, "a", 1);
-			ft_write_preci_str(s);
-		}
 	}
 	return ;
 }
