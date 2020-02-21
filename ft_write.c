@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/19 22:03:08 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/21 15:10:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,15 @@ void		ft_pad_13(t_printf *s)
 	return ;
 }
 
+void		ft_pad_14(t_printf *s)
+{
+	ft_write_sign(s);
+	ft_write_arg(s);
+	ft_write_width2(s);
+	return ;
+}
+
+
 void		ft_order(t_printf *s)
 {
 	s->tmp_len = ft_strlen(s->tmp);
@@ -154,14 +163,14 @@ void		ft_order2(t_printf *s)
 	{
 		if (s->precision == 0 && s->tmp[0] != '0' && s->neg_width == 0)
 			ft_pad_11(s);
+		else if (s->neg_precision == 1 && s->neg_width == 1)
+			ft_pad_14(s);
 		else if (s->precision == 0 != s->neg_width && s->tmp[0] != '0')
-			ft_pad_7(s);
+			ft_pad_6(s);
 		else if (s->precision == 0 && s->tmp[0] == '0')
 			ft_pad_1(s);
 		else if (s->neg_precision == 1 && s->neg_width == 0)
 			ft_pad_11(s);
-		else if (s->neg_precision == 1 && s->neg_width == 1)
-			ft_pad_6(s);
 		else if (s->neg_precision == 0 && s->neg_width == 0)
 			ft_pad_11(s);
 		else
@@ -295,10 +304,10 @@ void		ft_write_width(t_printf *s)
 	i = 0;
 	c = ' ';
 	s->tmp_len = ft_strlen(s->tmp);
-	if (s->precision > s->tmp_len)
+	if (s->precision > s->tmp_len && s->neg_precision == 0)
 		s->tmp_len = s->precision + s->sign;
 	else
-		s->tmp_len += s->sign;
+		s->tmp_len = s->tmp_len + s->sign;
 	if (s->tmp_len == 1 && s->precision == 0 && s->precision_on == 1)
 		s->tmp_len = s->tmp_len;
 	while (i < s->width - s->tmp_len)
@@ -309,6 +318,24 @@ void		ft_write_width(t_printf *s)
 	}
 	return ;
 }
+
+void		ft_write_width2(t_printf *s)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	c = ' ';
+	s->tmp_len = ft_strlen(s->tmp);
+	while (i < s->width - s->tmp_len)
+	{
+		write(1, &c, 1);
+		i++;
+		s->michel++;
+	}
+	return ;
+}
+
 
 void		ft_write_width_zero(t_printf *s)
 {
