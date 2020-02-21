@@ -6,19 +6,19 @@
 /*   By: mchardin <mchardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 15:40:07 by mchardin          #+#    #+#             */
-/*   Updated: 2020/02/14 11:09:24 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/21 15:54:12 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-int				ft_ft_printff(const char *str, ...);
-
+#include "ft_printf.h"
 
 int main()
 {
+	ft_printf("%s%s%s", "1", "2", "3's a charm");
+	/*
 	int		a = -4;
 	int		b = 0;
 	char	c = 'a';
@@ -40,6 +40,7 @@ int main()
 	char	*s = "-2147483648";
 	char	*t = "0x12345678";
 	char	*u = "-0";
+
 
 	ft_printf(" --- Return : %d\n", ft_printf("Simple input test"));
 	ft_printf(" --- Return : %d\n", ft_printf("%i, %d, %d, %d, %d, %s, %c, %d, %u, %x, %X", i, j, k, l, m, n, c, c, j, j, j)); //T2
@@ -185,7 +186,6 @@ int main()
 	// ^ Theoriquement un comportement indefini mais testé par la moulinette
     ft_printf(" --- Return : %d\n", ft_printf("(null)"));
 	ft_printf(" --- Return : %d\n", ft_printf(""));
-
-	sleep(5000);
+*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/19 22:03:15 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/21 16:20:15 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		ft_pourcent(t_printf *s)
 		return ;
 	tmp = '%';
 	s->tmp[0] = tmp;
-	s->str = ft_strjoin(s->str, s->tmp);
+	ft_order(s);
 	s->fmt += 1;
 	return ;
 }
@@ -57,8 +57,18 @@ void		ft_c(t_printf *s)
 	if (s->width == 0)
 		s->width = 1;
 	tmp = (char)va_arg(s->par, int);
-	write(1, &tmp, 1);
-	s->michel++;
+	if (s->minus == 1 && s->star == 0)
+	{
+		write(1, &tmp, 1);
+		ft_write_width3(s);
+		s->michel++;
+	}
+	else 
+	{
+		ft_write_width3(s);
+		write(1, &tmp, 1);
+		s->michel++;
+	}
 	s->fmt += 1;
 	return ;
 }
@@ -112,5 +122,6 @@ void		ft_s2(t_printf *s)
 		else
 			ft_s3(s);
 	}
+	s->fmt += 1;
 	return ;
 }
