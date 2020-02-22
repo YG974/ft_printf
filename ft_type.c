@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 19:47:16 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 20:02:30 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,7 @@ void		ft_pourcent(t_printf *s)
 		return ;
 	tmp = '%';
 	s->tmp[0] = tmp;
-	if (s->minus == 1 || s->neg_width == 1)
-	{
-		write(1, &tmp, 1);
-		ft_write_width3(s);
-		s->michel++;
-	}
-	else
-	{
-		ft_write_width3(s);
-		write(1, &tmp, 1);
-		s->michel++;
-	}
+	ft_order(s);
 	free(s->tmp);
 	s->fmt += 1;
 	return ;

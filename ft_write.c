@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 19:38:10 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 20:20:24 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -517,7 +517,7 @@ void		ft_print_s2(t_printf *s)
 void		ft_print_s3(t_printf *s)
 {
 	ft_write_preci_str(s);
-	ft_write_width_str(s);
+	ft_write_width_str2(s);
 	return ;
 }
 
