@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/21 17:23:44 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 16:03:32 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void		ft_order2(t_printf *s)
 		if (s->precision == 0 && s->tmp[0] != '0' && s->neg_width == 0)
 			ft_pad_11(s);
 		else if (s->neg_precision == 1 && s->neg_width == 1)
-			ft_pad_14(s);
+			ft_pad_2(s);
 		else if (s->precision == 0 != s->neg_width && s->tmp[0] != '0')
 			ft_pad_6(s);
 		else if (s->precision == 0 && s->tmp[0] == '0')
