@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:21:58 by ygeslin           ##    #+#             */
-/*   Updated: 2020/02/21 17:12:26 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 15:43:21 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int			ft_printf(const char *format, ...)
 
 		while (s.fmt[0] != '%' && s.fmt[0] != 0)
 		{
-			if (s.fmt[0] == 's')
-				s.fmt++;
 			write(1, &s.fmt[0], 1);
 			s.michel++;
 			s.fmt++;
