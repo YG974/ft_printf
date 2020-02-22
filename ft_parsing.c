@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/18 19:58:38 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:23:41 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void		ft_parsing(t_printf *s)
 {
-	ft_putstr_fd(s->str, 1);
-	s->michel += ft_strlen(s->str);
-	s->str[0] = '\0';
 	ft_get_flags(s);
 	ft_get_precision(s);
 	ft_get_width(s);

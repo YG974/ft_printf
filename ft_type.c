@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/21 16:20:15 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/21 17:23:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void		ft_get_type(t_printf *s)
 	if (s->fmt[0] == '.')
 		ft_get_precision(s);
 	if (s->fmt[0] == 'c')
-	{
 		ft_c(s);
-	}
 	if (s->fmt[0] == 's')
 		ft_s(s);
 	if (s->fmt[0] == 'p')
@@ -92,7 +90,6 @@ void		ft_s(t_printf *s)
 	}
 	else
 		ft_s2(s);
-	s->fmt += 1;
 	return ;
 }
 
@@ -122,6 +119,5 @@ void		ft_s2(t_printf *s)
 		else
 			ft_s3(s);
 	}
-	s->fmt += 1;
 	return ;
 }
