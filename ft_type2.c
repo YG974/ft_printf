@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:27:45 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/21 17:23:43 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 17:11:17 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		ft_p(t_printf *s)
 	}
 	else
 		s->tmp = ft_itoa_base(ptr, "0123456789abcdef");
-	s->tmp = ft_strjoin("0x", s->tmp);
+	s->tmp = ft_strjoin2("0x", s->tmp);
 	ft_order(s);
 	s->fmt += 1;
 	return ;

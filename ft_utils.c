@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:14:36 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/14 11:32:50 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 16:38:14 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,63 @@ int			ft_int_strchr(const char *s, int c)
 	return (-1);
 }
 
-char		*ft_strjoin_n(char *s1, char *s2, int n)
+char	*ft_strjoin1(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
 	int		i;
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!(s2 && s1))
 		return (NULL);
-	len1 = 0;
-	len2 = (n > ft_strlen(s2) ? ft_strlen(s2) : n);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
 	i = 0;
 	if (!(str = malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
-	while (i < len1 && s1[i] != '\0')
+	while (i < len1)
 	{
 		str[i] = s1[i];
 		i++;
 	}
-	while (i < len1 + len2 && s2[i] != '\0')
+	while (i < len1 + len2)
 	{
 		str[i] = s2[i - len1];
 		i++;
 	}
-	str[i] = '\0';
+	str[len1 + len2] = '\0';
 	free(s1);
 	return (str);
 }
 
+char	*ft_strjoin2(char *s1, char *s2)
+{
+	int		len1;
+	int		len2;
+	int		i;
+	char	*str;
+
+	if (!(s2 && s1))
+		return (NULL);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	i = 0;
+	if (!(str = malloc(sizeof(char) * (len1 + len2 + 1))))
+		return (NULL);
+	while (i < len1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i < len1 + len2)
+	{
+		str[i] = s2[i - len1];
+		i++;
+	}
+	str[len1 + len2] = '\0';
+	free(s2);
+	return (str);
+}
 char		*ft_strjoin_endl(char *s1, char *s2)
 {
 	int		len1;

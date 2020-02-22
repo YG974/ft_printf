@@ -6,7 +6,7 @@
 /*   By: mchardin <mchardin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 15:40:07 by mchardin          #+#    #+#             */
-/*   Updated: 2020/02/21 17:06:29 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 16:30:38 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 int main()
 {
-	ft_printf("%s%s%s", "1", "2", "3's a charm");
-	/*
 	int		a = -4;
 	int		b = 0;
 	char	c = 'a';
@@ -186,6 +184,6 @@ int main()
 	// ^ Theoriquement un comportement indefini mais testé par la moulinette
     ft_printf(" --- Return : %d\n", ft_printf("(null)"));
 	ft_printf(" --- Return : %d\n", ft_printf(""));
-*/
+	sleep(500);
 	return (0);
 }

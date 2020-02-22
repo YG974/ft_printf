@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 16:03:32 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 16:32:21 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,12 @@ void		ft_write_sign(t_printf *s)
 		write(1, "-", 1);
 		s->michel++;
 	}
+	else if (s->space == 1 && s->positive == 0 && s->sign == 0)
+	{
+		write(1, " ", 1);
+		s->michel++;
+	}
+
 	else if (s->positive == 1 && s->sign == 0)
 	{
 		write(1, "+", 1);
