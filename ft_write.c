@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 19:17:11 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 19:38:10 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,6 @@ void		ft_pad_13(t_printf *s)
 	return ;
 }
 
-void		ft_pad_14(t_printf *s)
-{
-	ft_write_sign(s);
-	ft_write_arg(s);
-	ft_write_width2(s);
-	return ;
-}
-
-
 void		ft_order(t_printf *s)
 {
 	s->tmp_len = ft_strlen(s->tmp);
@@ -224,13 +215,8 @@ void		ft_order4(t_printf *s)
 			else
 				ft_pad_6(s);
 		}
-		else if (s->neg_precision == 1)
-		{
-			if (s->neg_width == 1)
-				ft_pad_2(s);
-			else
-				ft_pad_12(s);
-		}
+		else
+			ft_order6(s);
 	}
 	else
 		ft_order5(s);
@@ -263,6 +249,23 @@ void		ft_order5(t_printf *s)
 	return ;
 }
 
+void		ft_order6(t_printf *s)
+{
+	if (s->zero == 1 && s->minus == 0)
+	{
+		if (s->neg_precision == 1)
+		{
+			if (s->neg_width == 1)
+				ft_pad_2(s);
+			else
+				ft_pad_12(s);
+		}
+	}
+	else
+		ft_order5(s);
+	return ;
+}
+
 void		ft_write_sign(t_printf *s)
 {
 	if (s->sign == 1)
@@ -285,7 +288,6 @@ void		ft_write_sign(t_printf *s)
 		write(1, "0x", 2);
 		s->michel += 2;
 	}
-
 	return ;
 }
 
@@ -362,8 +364,6 @@ void		ft_write_width3(t_printf *s)
 	}
 	return ;
 }
-
-
 
 void		ft_write_width_zero(t_printf *s)
 {

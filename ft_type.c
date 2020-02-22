@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 18:58:54 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 19:47:16 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void		ft_pourcent(t_printf *s)
 		ft_write_width3(s);
 		s->michel++;
 	}
-	else 
+	else
 	{
 		ft_write_width3(s);
 		write(1, &tmp, 1);
@@ -73,7 +73,7 @@ void		ft_c(t_printf *s)
 		ft_write_width3(s);
 		s->michel++;
 	}
-	else 
+	else
 	{
 		ft_write_width3(s);
 		write(1, &tmp, 1);
@@ -87,7 +87,10 @@ void		ft_s(t_printf *s)
 {
 	s->tmp = ((char*)va_arg(s->par, char *));
 	if (s->tmp == NULL)
-		s->tmp = ft_strjoin1(s->tmp, "(null)");
+	{
+		s->tmp = ft_strjoin("", "(null)");
+		s->sign = 1;
+	}
 	s->tmp_len = ft_strlen(s->tmp);
 	if (s->precision_on == 0 && s->width_on == 0 && s->dot == 0)
 		ft_write_arg(s);
@@ -102,7 +105,7 @@ void		ft_s(t_printf *s)
 	}
 	else
 		ft_s2(s);
-	if (s->tmp == NULL)
+	if (s->sign == 1)
 		free(s->tmp);
 	return ;
 }
