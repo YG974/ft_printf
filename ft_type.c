@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 15:42:02 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 15:58:51 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		ft_c(t_printf *s)
 	if (s->width == 0)
 		s->width = 1;
 	tmp = (char)va_arg(s->par, int);
-	if (s->minus == 1 && s->star == 0)
+	if (s->minus == 1 || s->neg_width == 1)
 	{
 		write(1, &tmp, 1);
 		ft_write_width3(s);
