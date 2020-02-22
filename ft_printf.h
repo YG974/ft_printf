@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/21 15:28:09 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 19:10:40 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@
 typedef struct	s_struct
 {
 	char		*fmt;
-	char		*str;
 	char		*tmp;
 	int			michel;
 	int			tmp_len;
 	int			sign;
+	int			p;
 	int			null;
 	int			minus;
 	int			positive;
@@ -106,7 +106,9 @@ char	*ft_itoa_base(long	nbr, char *base);
 char	*ft_strjoin_endl(char *s1, char *s2);
 char	*ft_strjoin_n(char *s1, char *s2, int n);
 char	*ft_strjoin2_n(char *s1, char *s2, int n);
+char	*ft_strjoin1(char *s1, char *s2);
 char	*ft_strjoin2(char *s1, char *s2);
+char	*ft_strjoin3(char *s1, char *s2);
 void	ft_c(t_printf *ptr);
 void	ft_s(t_printf *ptr);
 void	ft_s2(t_printf *ptr);

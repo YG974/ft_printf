@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:06:11 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 16:32:21 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/22 19:17:11 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,12 +275,17 @@ void		ft_write_sign(t_printf *s)
 		write(1, " ", 1);
 		s->michel++;
 	}
-
 	else if (s->positive == 1 && s->sign == 0)
 	{
 		write(1, "+", 1);
 		s->michel++;
 	}
+	else if (s->p == 1)
+	{
+		write(1, "0x", 2);
+		s->michel += 2;
+	}
+
 	return ;
 }
 
@@ -309,7 +314,7 @@ void		ft_write_width(t_printf *s)
 
 	i = 0;
 	c = ' ';
-	s->tmp_len = ft_strlen(s->tmp);
+	s->tmp_len = ft_strlen(s->tmp) + s->p * 2;
 	if (s->precision > s->tmp_len && s->neg_precision == 0)
 		s->tmp_len = s->precision + s->sign;
 	else
