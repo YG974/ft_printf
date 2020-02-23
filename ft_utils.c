@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:14:36 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 20:28:05 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:51:47 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ char	*print_nbr_base(long nb, char *base, int len_base, int len_res)
 
 	sign = 0;
 	if (nb < 0)
-	{
 		nb = -nb;
-		sign = 1;
-	}
 	if (!(res = (char *)malloc(sizeof(char) * (len_res + sign))))
 		return (NULL);
 	res[len_res + sign - 1] = '\0';
