@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/23 18:40:46 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:06:12 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void		ft_get_type(t_printf *s)
 		ft_x_up(s);
 	if (s->fmt[0] == '%')
 		ft_pourcent(s);
+	else
+		ft_no_arg(s);
 	return ;
 }
 
