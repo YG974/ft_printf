@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:17:07 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 19:29:22 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:05:02 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		ft_init_flags(t_printf *s)
 	s->minus = 0;
 	s->positive = 0;
 	s->zero = 0;
+	s->tmp = 0;
 	s->p = 0;
 	s->null = 0;
 	s->space = 0;

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 20:02:30 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:02:25 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		ft_pourcent(t_printf *s)
 	s->tmp[0] = tmp;
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }
 
@@ -68,7 +67,6 @@ void		ft_c(t_printf *s)
 		write(1, &tmp, 1);
 		s->michel++;
 	}
-	s->fmt += 1;
 	return ;
 }
 
@@ -86,7 +84,7 @@ void		ft_s(t_printf *s)
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 0)
 	{
 		if (s->dot == 1 && s->precision_on == 0)
-			ft_print_s6(s);
+			ft_write_width_str3(s);
 		else if (s->neg_width == 1)
 			ft_print_s4(s);
 		else
@@ -103,6 +101,8 @@ void		ft_s2(t_printf *s)
 {
 	if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 0)
 		ft_write_preci_str(s);
+	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 1 && s->dot == 1)
+		ft_write_width_str3(s);
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 1)
 		ft_print_s4(s);
 	else if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 1)

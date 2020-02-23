@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:27:45 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/22 19:08:56 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:03:09 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		ft_p(t_printf *s)
 		s->tmp = ft_itoa_base(ptr, "0123456789abcdef");
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }
 
@@ -58,7 +57,6 @@ void		ft_d(t_printf *s)
 		s->tmp = ft_itoa_base(d, "0123456789");
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }
 
@@ -80,7 +78,6 @@ void		ft_u(t_printf *s)
 		s->tmp = ft_itoa_base(u, "0123456789");
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }
 
@@ -102,7 +99,6 @@ void		ft_x(t_printf *s)
 		s->tmp = ft_itoa_base(l, "0123456789abcdef");
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }
 
@@ -124,6 +120,5 @@ void		ft_x_up(t_printf *s)
 		s->tmp = ft_itoa_base(l, "0123456789ABCDEF");
 	ft_order(s);
 	free(s->tmp);
-	s->fmt += 1;
 	return ;
 }

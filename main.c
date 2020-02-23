@@ -1,6 +1,7 @@
 #include "ft_printf.h"
+#include <stdio.h> 
 
 int main ()
 {
-	ft_printf("neg2 %*.*s\n", -9, 4, "coucou");
+	ft_printf("%s%s%s", "1", "2", "3's a charm");
 }
