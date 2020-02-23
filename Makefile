@@ -6,7 +6,7 @@
 #    By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/26 19:33:02 by ygeslin           #+#    #+#              #
-#    Updated: 2020/02/11 15:07:22 by ygeslin          ###   ########.fr        #
+#    Updated: 2020/02/23 15:48:53 by ygeslin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,9 +58,16 @@ SRCS    =	libft/ft_isascii.c \
 			ft_utils.c \
 			ft_parsing.c \
 			ft_parsing2.c \
-			ft_padding.c \
 			ft_type.c \
 			ft_type2.c \
+			ft_write.c \
+			ft_write2.c \
+			ft_write3.c \
+			ft_write4.c \
+			ft_write5.c \
+			ft_write6.c \
+			ft_write7.c \
+			ft_write8.c \
 
 SRCDIR    = ./
 CC        = gcc

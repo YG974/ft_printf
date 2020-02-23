@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 14:23:42 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/23 18:35:47 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:13:36 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "libft/libft.h"
 
 typedef struct	s_struct
 {

@@ -6,7 +6,7 @@
 /*   By: ygeslin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 14:23:33 by ygeslin           #+#    #+#             */
-/*   Updated: 2020/02/23 19:06:12 by ygeslin          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:35:42 by ygeslin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void		ft_s(t_printf *s)
 	s->tmp_len = ft_strlen(s->tmp);
 	if (s->precision_on == 0 && s->width_on == 0 && s->dot == 0)
 		ft_write_arg(s);
+	else if (s->precision_on == 0 && s->minus == 1 && s->dot == 1)
+		ft_write_width_str3(s);
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 0)
 	{
 		if (s->dot == 1 && s->precision_on == 0)
@@ -103,8 +105,6 @@ void		ft_s2(t_printf *s)
 {
 	if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 0)
 		ft_write_preci_str(s);
-	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 1 && s->dot == 1)
-		ft_write_width_str3(s);
 	else if (s->width_on == 1 && s->precision_on == 0 && s->minus == 1)
 		ft_print_s4(s);
 	else if (s->precision_on == 1 && s->width_on == 0 && s->neg_precision == 1)
