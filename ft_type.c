@@ -45,7 +45,18 @@ void		ft_pourcent(t_printf *s)
 		return ;
 	tmp = '%';
 	s->tmp[0] = tmp;
-	ft_order(s);
+	if (s->minus == 1 || s->neg_width == 1)
+	{
+		write(1, &tmp, 1);
+		ft_write_width3(s);
+		s->michel++;
+	}
+	else
+	{
+		ft_write_width3(s);
+		write(1, &tmp, 1);
+		s->michel++;
+	}
 	free(s->tmp);
 	return ;
 }
